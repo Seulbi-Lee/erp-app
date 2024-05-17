@@ -1,4 +1,4 @@
-import { createServer } from "@/app/utils/supabase/server";
+import { createServer } from "@/utils/supabase/server";
 import React from "react";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
@@ -9,14 +9,15 @@ export const metadata: Metadata = {
 };
 
 const SigninPage = async () => {
-  const supabase = createServer();
-  const authInfo = await supabase.auth.getSession();
-  const session = authInfo.data.session;
+  // 미들웨어에서 대체함
+  // const supabase = createServer();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  if (session) {
-    redirect("/auth/myPage")
-  }
-
+  // if (user) {
+  //   redirect("/account/mypage");
+  // }
 
   return (
     <>

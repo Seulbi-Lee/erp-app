@@ -1,4 +1,4 @@
-import { createServer } from "@/app/utils/supabase/server";
+import { createServer } from "@/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,5 +9,5 @@ export async function GET(req: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
-  return NextResponse.redirect("http://localhost:3000/auth/setUserInfo");
+  return NextResponse.redirect("http://localhost:3000/account/setUserInfo");
 }

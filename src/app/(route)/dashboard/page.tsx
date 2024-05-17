@@ -16,7 +16,7 @@ const DashboardPage = () => {
           <Button fullWidth type="button" mt="sm">
             Store 1
           </Button>
-          <Link href="/auth/addStore" target="_self">
+          <Link href="/account/addStore" target="_self">
             <Button fullWidth type="button" mt="sm">
               + Add Store
             </Button>

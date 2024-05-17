@@ -1,28 +1,31 @@
 "use client";
 
 import styles from "@/app/(route)/auth/auth.module.scss";
-import { createClient } from "@/app/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { Anchor, Button, PasswordInput, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
 
 const SignInComponent = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  // const emailRef = useRef<HTMLInputElement>(null);
+  // const passwordRef = useRef<HTMLInputElement>(null);
 
   const supabse = createClient();
   const route = useRouter();
 
-  const signinHandler = async (event: FormEvent) => {
-    event.preventDefault();
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    if (!emailRef.current || !passwordRef.current) {
-      return;
-    }
-
+  const signinHandler = async (values: { email: string; password: string }) => {
     const { error: signinError } = await supabse.auth.signInWithPassword({
-      email: emailRef.current.value.trim(),
-      password: passwordRef.current.value.trim(),
+      email: values.email,
+      password: values.password,
     });
 
     if (signinError) {
@@ -45,9 +48,23 @@ const SignInComponent = () => {
           </div>
         </div>
 
-        <form onSubmit={signinHandler} className={styles.form}>
-          <TextInput ref={emailRef} placeholder="Email" />
-          <PasswordInput ref={passwordRef} mt="md" placeholder="PW" />
+        <form
+          onSubmit={form.onSubmit((values) => signinHandler(values))}
+          className={styles.form}
+        >
+          <TextInput
+            placeholder="Email"
+            withAsterisk
+            key={form.key("email")}
+            {...form.getInputProps("email")}
+          />
+          <PasswordInput
+            mt="md"
+            placeholder="PW"
+            withAsterisk
+            key={form.key("password")}
+            {...form.getInputProps("password")}
+          />
           <Button fullWidth mt="lg" type="submit">
             login
           </Button>

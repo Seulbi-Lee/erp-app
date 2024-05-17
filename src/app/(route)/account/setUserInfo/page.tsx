@@ -1,4 +1,4 @@
-import { createServer } from "@/app/utils/supabase/server";
+import { createServer } from "@/utils/supabase/server";
 import React from "react";
 import SetUserInfoComponent from "./setUserInfoComponent";
 import { redirect } from "next/navigation";
@@ -10,15 +10,14 @@ export const metadata: Metadata = {
 
 const SetUserInfoPage = async () => {
   const supabase = createServer();
-  const authInfo = await supabase.auth.getSession();
-  const session = authInfo.data.session;
+  const { data: {user}} = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     redirect("/auth");
   }
 
-  const uid = session!.user.id;
-  const fullname = session!.user.user_metadata.fullname;
+  const uid = user.id;
+  const fullname = user.user_metadata.fullname;
 
   return (
     <>

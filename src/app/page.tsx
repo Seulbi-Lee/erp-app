@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createServer } from "./utils/supabase/server";
+import { createServer } from "@/utils/supabase/server";
 
 const Home = async () => {
   const supabase = createServer();
@@ -7,11 +7,11 @@ const Home = async () => {
   const session = auth.data.session;
 
   if (!session) {
-    redirect("/auth");
+    redirect("/auth/signin");
   } else {
     redirect("/dashboard");
   }
-
+    
   return (
     <>
       <div className="loading">

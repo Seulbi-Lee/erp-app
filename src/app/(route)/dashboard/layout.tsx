@@ -1,4 +1,5 @@
-import { createServer } from "@/app/utils/supabase/server";
+import { createAdmin } from "@/utils/supabase/admin";
+import { createServer } from "@/utils/supabase/server";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -7,15 +8,34 @@ export const metadata: Metadata = {
 };
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-  const supabase = createServer();
-  const auth = await supabase.auth.getSession();
-  const session = auth.data.session;
+  const supabaseAuth = createServer();
+  const supabase = createAdmin();
 
-  if (!session) {
-    redirect("/auth");
+  // check user session
+  const {
+    data: { user },
+  } = await supabaseAuth.auth.getUser();
+
+  if (!user) return;
+  
+  // check username
+  const { data: usernameData, error: usernameError } = await supabase
+    .from("users")
+    .select("username")
+    .eq("id", user.id);
+
+  if(usernameError) {
+    console.log(usernameError);
+    return;
+  }
+
+  if (!usernameData.length) {
+    console.log(0)
+    redirect("/auth/setUserInfo");
   }
 
   return <>{children}</>;
 };
+
 
 export default DashboardLayout;

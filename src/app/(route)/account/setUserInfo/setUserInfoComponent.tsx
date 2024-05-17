@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "@/app/(route)/auth/auth.module.scss";
-import { createClient } from "@/app/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { Anchor, Button, TextInput } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
@@ -31,8 +31,10 @@ const SetUserInfoComponent = ({
     });
 
     if (insertError) {
-      if (insertError.code === '409') {
+      if (insertError.code === '23505') {
         setUsernameError("Username already exists")
+        usernameRef.current.value = "";
+        return;
       }
       alert("Unknown Error: try again");
       return;

@@ -1,7 +1,6 @@
 "use client";
 
-import styles from "@/app/(route)/auth/auth.module.scss";
-import { createClient } from "@/app/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { Button } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +14,7 @@ const JoinStorePage = () => {
       console.error(signOutError);
       return;
     }
-    router.push('/auth')
+    router.push('/auth/signin')
   };
 
   return (
