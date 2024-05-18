@@ -29,14 +29,15 @@ const NewStoreComponent = () => {
         storename: values.storename,
         password: values.password,
       })
-      .select("id");
+      .select("id")
+      .single();
 
     if (storeError) {
       console.error(storeError);
       return;
     }
 
-    const storeID = storeData[0].id;
+    const storeID = storeData.id;
 
     const { error: memberError } = await supabase.from("store_members").insert({
       store_id: storeID,
@@ -48,6 +49,8 @@ const NewStoreComponent = () => {
       console.error(memberError);
       return;
     }
+
+    route.push("/dashboard");
   };
 
   return (

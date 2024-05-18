@@ -1,7 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware.util";
+import { createAdmin } from "./utils/supabase/admin";
 
 export async function middleware(request: NextRequest) {
+  const supabaseAdmin = createAdmin();
   const { response, supabase } = updateSession(request);
   const { pathname: requestPath } = request.nextUrl;
   
@@ -14,6 +16,22 @@ export async function middleware(request: NextRequest) {
     if (requestPath.startsWith("/auth")) {
       return NextResponse.redirect(new URL("/account/mypage", request.url));
     }
+
+    // check username
+    const { data: usernameData, error: usernameError } = await supabaseAdmin
+    .from("users")
+    .select("username")
+    .eq("id", user.id);
+
+    if(usernameError) {
+      console.log(usernameError);
+      return;
+    }
+
+    if (!usernameData.length) {
+      return NextResponse.redirect(new URL("/auth/setUserInfo", request.url));
+    }
+
     return response;
   } else {
     // auth로 시작하는 url에 user가 없으면 그대로 넘김

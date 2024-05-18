@@ -8,31 +8,31 @@ export const metadata: Metadata = {
 };
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-  const supabaseAuth = createServer();
-  const supabase = createAdmin();
+  // const supabaseAuth = createServer();
+  // const supabase = createAdmin();
 
-  // check user session
-  const {
-    data: { user },
-  } = await supabaseAuth.auth.getUser();
+  // // check user session
+  // const {
+  //   data: { user },
+  // } = await supabaseAuth.auth.getUser();
 
-  if (!user) return;
+  // if (!user) return;
   
-  // check username
-  const { data: usernameData, error: usernameError } = await supabase
-    .from("users")
-    .select("username")
-    .eq("id", user.id);
+  // // check username
+  // const { data: usernameData, error: usernameError } = await supabase
+  //   .from("users")
+  //   .select("username")
+  //   .eq("id", user.id);
 
-  if(usernameError) {
-    console.log(usernameError);
-    return;
-  }
+  // if(usernameError) {
+  //   console.log(usernameError);
+  //   return;
+  // }
 
-  if (!usernameData.length) {
-    console.log(0)
-    redirect("/auth/setUserInfo");
-  }
+  // if (!usernameData.length) {
+  //   console.log(0)
+  //   redirect("/auth/setUserInfo");
+  // }
 
   return <>{children}</>;
 };
