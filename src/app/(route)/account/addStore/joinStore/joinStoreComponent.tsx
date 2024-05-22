@@ -1,12 +1,7 @@
 "use client";
 
 import styles from "@/app/(route)/auth/auth.module.scss";
-import {
-  Anchor,
-  Button,
-  PasswordInput,
-  TextInput,
-} from "@mantine/core";
+import { Anchor, Button, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -59,8 +54,13 @@ const JoinStoreComponent = () => {
       alert(data);
       return;
     }
-    console.log(data)
-    route.push("/account/addStore/joinStore/setMemberInfo");
+    console.log(data);
+
+    route.push(
+      "/account/addStore/joinStore/setMemberInfo?" +
+        "storename=" +
+        values.storename
+    );
   };
 
   return (
