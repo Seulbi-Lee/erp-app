@@ -1,0 +1,53 @@
+@import "@/app/globals.scss";
+
+.calendar {
+  :global {
+    .header-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 0 0.5rem;
+      margin: 0.5rem 0;
+      gap: 0.5rem;
+
+      .year-display {
+        flex: 1 0 100%;
+      }
+      .month-display {
+        font-size: $font-xl;
+        font-weight: 500;
+        width: 3rem;
+      }
+    }
+
+    .calendar-section {
+      .day-row {
+        display: flex;
+        background-color: $color-bg;
+
+        .day {
+          width: calc(100% / 7);
+          padding: 0.5rem 0;
+          text-align: center;
+          font-size: $font-xs;
+        }
+      }
+
+      .week-row {
+        display: flex;
+        border-bottom: 1px solid $color-border;
+
+        .date {
+          width: calc(100% / 7);
+          padding: 0.5rem 0.5rem 3rem 0.5rem;
+          cursor: pointer;
+          font-size: $font-xs;
+
+          &.out-month {
+            color: $color-secondary-text;
+          }
+        }
+      }
+    }
+  }
+}
