@@ -16,7 +16,7 @@ const AddStorePage = () => {
             New Store
           </Button>
         </Link>
-        <Link href="/auth/addStore/joinStore" target="_self">
+        <Link href="/account/addStore/joinStore" target="_self">
           <Button fullWidth mt="lg" type="button">
             Join Store
           </Button>

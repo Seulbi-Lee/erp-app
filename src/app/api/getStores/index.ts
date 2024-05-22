@@ -1,6 +1,5 @@
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
-import { NextResponse } from "next/server";
 import "server-only"
 
 export const getStores = async () => {

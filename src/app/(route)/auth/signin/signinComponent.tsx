@@ -11,7 +11,7 @@ const SignInComponent = () => {
   // const emailRef = useRef<HTMLInputElement>(null);
   // const passwordRef = useRef<HTMLInputElement>(null);
 
-  const supabse = createClient();
+  const supabase = createClient();
   const route = useRouter();
 
   const form = useForm({
@@ -23,7 +23,7 @@ const SignInComponent = () => {
   });
 
   const signinHandler = async (values: { email: string; password: string }) => {
-    const { error: signinError } = await supabse.auth.signInWithPassword({
+    const { error: signinError } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
     });
