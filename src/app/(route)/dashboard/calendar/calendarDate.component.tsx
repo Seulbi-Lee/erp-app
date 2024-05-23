@@ -17,9 +17,11 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
     getTodoForDate(dateTime)
   );
   const route = useRouter();
+  const date = dateTime.toFormat("yyyy-MM-dd");
 
   const dailyScheduleHandler = () => {
-    route.push("/dashboard/dailySchedule");
+
+    route.push("/dashboard/dailySchedule?date=" + date);
   }
 
   return (
@@ -29,13 +31,13 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
         onClick={dailyScheduleHandler}
       >
         {dateTime.day}
-        {todoList.map((todo, index) => {
+        {/* {todoList.map((todo, index) => {
           return (
             <div key={index}>
               <span>{todo}</span>
             </div>
           );
-        })}
+        })} */}
       </div>
     </>
   );
