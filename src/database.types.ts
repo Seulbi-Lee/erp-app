@@ -9,6 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      schedules: {
+        Row: {
+          date: string
+          end: string
+          id: string
+          start: string
+          store_id: string
+          user_id: string
+        }
+        Insert: {
+          date: string
+          end: string
+          id?: string
+          start: string
+          store_id: string
+          user_id: string
+        }
+        Update: {
+          date?: string
+          end?: string
+          id?: string
+          start?: string
+          store_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedules_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "schedules_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       store_members: {
         Row: {
           created_at: string
@@ -19,6 +61,7 @@ export type Database = {
           position: string | null
           store_id: string
           user_id: string
+          verify: boolean | null
         }
         Insert: {
           created_at?: string
@@ -29,6 +72,7 @@ export type Database = {
           position?: string | null
           store_id: string
           user_id?: string
+          verify?: boolean | null
         }
         Update: {
           created_at?: string
@@ -39,6 +83,7 @@ export type Database = {
           position?: string | null
           store_id?: string
           user_id?: string
+          verify?: boolean | null
         }
         Relationships: [
           {
