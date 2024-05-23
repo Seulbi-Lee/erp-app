@@ -2,5 +2,22 @@
 
 .container {
   height: 100%;
-  padding: 0 20px;
+  :global{
+    .container-inner {
+      padding: 0 20px;
+    }
+
+    .detail-title {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .select-time {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+  }
 }
