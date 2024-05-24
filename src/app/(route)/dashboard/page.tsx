@@ -1,4 +1,3 @@
-import styles from "@/app/(route)/dashboard/dashboard.module.scss";
 import { Button } from "@mantine/core";
 import Link from "next/link";
 import { createAdmin } from "@/utils/supabase/admin";
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const DashboardPage = async () => {
-  const storeData = await getStores();
+  const storeData = await getStores(); //api
 
   const supabaseAuth = createServer();
   const supabase = createAdmin();
@@ -44,26 +43,41 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <div className={styles.container}>
-        <div>{userData?.username}</div>
+      <header className="header">
+        <Link href="/account/mypage">{userData?.username}</Link>
+      </header>
 
-        <CalendarComponent />
+      <div className="main">
+        <div className="content">
+          <CalendarComponent />
 
-        <div className="container-inner">
-          {storeData &&
-            storeData.map((store, index: number) => {
-              return (
-                <Button fullWidth type="button" mt="sm" key={index}>
-                  {store.stores?.storename}
-                </Button>
-              );
-            })}
+          <div className="container-inner">
+            {storeData &&
+              storeData.map((store, index: number) => {
+                return (
+                  <Link
+                    href={"/dashboard/store/schedule?id=" + store.store_id}
+                    key={index}
+                  >
+                    <Button fullWidth type="button" mt="sm">
+                      {store.stores?.storename}
+                    </Button>
+                  </Link>
+                );
+              })}
 
-          <Link href="/account/addStore" target="_self">
-            <Button fullWidth type="button" mt="sm">
-              + Add Store
-            </Button>
-          </Link>
+            <Link href="/account/addStore" target="_self">
+              <Button fullWidth type="button" mt="sm">
+                + Add Store
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed-bottom">
+        <div className="amount">
+          <span>$ 0.00</span>
         </div>
       </div>
     </>
