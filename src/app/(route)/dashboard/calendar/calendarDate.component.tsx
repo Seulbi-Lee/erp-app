@@ -20,9 +20,8 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   const date = dateTime.toFormat("yyyy-MM-dd");
 
   const dailyScheduleHandler = () => {
-
     route.push("/dashboard/dailySchedule?date=" + date);
-  }
+  };
 
   return (
     <>
@@ -50,12 +49,13 @@ function cx(...classnames: string[]): string {
 }
 
 const TODO_STORAGE_KEY = "todoData";
-const makeDateKey = (dateTime: DateTime): string => dateTime.toFormat("yyyy-MM-dd");
+const makeDateKey = (dateTime: DateTime): string =>
+  dateTime.toFormat("yyyy-MM-dd");
 
 const getTodoForDate = (dateTime: DateTime): string[] => {
   try {
     const TodoStorageStr = localStorage.getItem(TODO_STORAGE_KEY);
-    if(!TodoStorageStr) {
+    if (!TodoStorageStr) {
       return [];
     }
 
@@ -64,4 +64,4 @@ const getTodoForDate = (dateTime: DateTime): string[] => {
   } catch (e) {
     return [];
   }
-}
+};

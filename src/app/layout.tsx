@@ -17,9 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta
+        name="viewport"
+        content="width=device-with, initial-scale=1, user-scalable=no"
+      />
       <link rel="icon" type="image/svg+xml" href="/logo_icon.svg"></link>
       <head>
-        <ColorSchemeScript/>
+        <ColorSchemeScript />
       </head>
       <body className={inter.className}>
         <MantineProvider>

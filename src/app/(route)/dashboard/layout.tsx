@@ -1,3 +1,4 @@
+import styles from "@/app/(route)/dashboard/dashboard.module.scss";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { Metadata } from "next";
@@ -17,7 +18,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   // } = await supabaseAuth.auth.getUser();
 
   // if (!user) return;
-  
+
   // // check username
   // const { data: usernameData, error: usernameError } = await supabase
   //   .from("users")
@@ -34,8 +35,11 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   //   redirect("/auth/setUserInfo");
   // }
 
-  return <>{children}</>;
+  return (
+    <>
+      <div className={styles.container}>{children}</div>
+    </>
+  );
 };
-
 
 export default DashboardLayout;

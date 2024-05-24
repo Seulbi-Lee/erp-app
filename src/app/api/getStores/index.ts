@@ -1,6 +1,6 @@
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
-import "server-only"
+import "server-only";
 
 export const getStores = async () => {
   const supabaseAuth = createServer();
@@ -15,15 +15,20 @@ export const getStores = async () => {
     // return NextResponse.json("no user", { status: 401 });
   }
 
-  const { data: storeData, error: storeError, status, statusText } = await supabase
+  const {
+    data: storeData,
+    error: storeError,
+    status,
+    statusText,
+  } = await supabase
     .from("store_members")
-    .select("stores(storename)")
-    .eq("user_id", user.id)
-  if(storeError) {
+    .select("store_id, stores(storename)")
+    .eq("user_id", user.id);
+  if (storeError) {
     throw new Error();
     // return NextResponse.json(storeError.message, {status, statusText})
   }
 
   // return NextResponse.json(storeData);
-  return storeData
-}
+  return storeData;
+};
