@@ -6,7 +6,6 @@ import styles from "@/app/(route)/dashboard/dashboard.module.scss";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IconClock, IconX } from "@tabler/icons-react";
 import { FC, PropsWithChildren, useRef } from "react";
-import "@mantine/dates/styles.css";
 import { useForm } from "@mantine/form";
 
 const DailyScheduleComponent: FC<PropsWithChildren> = ({}: {}) => {
