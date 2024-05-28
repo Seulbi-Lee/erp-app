@@ -3,6 +3,7 @@
 import styles from "@/app/(route)/auth/auth.module.scss";
 import { createClient } from "@/utils/supabase/client";
 import { Anchor, Button, PasswordInput, TextInput } from "@mantine/core";
+import { headers } from "next/headers";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
 
@@ -58,12 +59,17 @@ const SignupPage = () => {
         email: emailRef.current.value.trim(),
         password: passwordRef.current.value.trim(),
         options: {
-          emailRedirectTo: "http://localhost:3000/api/auth",
           data: {
+            originUrl: location.origin,
             fullname: fullnameRef.current.value.trim(),
           },
+          emailRedirectTo: `${location.origin}/api/auth`,
         },
       });
+      // location.origin ->  client
+      // header.origin -> server
+      const header = headers();
+      console.log(header.get(""));
 
       if (signupError) {
         alert("Unknown Error: try again");

@@ -36,10 +36,11 @@ const SignupComponent = () => {
       email: values.email,
       password: values.password,
       options: {
-        emailRedirectTo: "http://localhost:3000/api/auth",
         data: {
+          originUrl: location.origin,
           fullname: values.name,
         },
+        emailRedirectTo: location.origin,
       },
     });
 
