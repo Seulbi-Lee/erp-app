@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     }
 
     if (!usernameData.length) {
-      return NextResponse.redirect(new URL("/auth/setUserInfo", request.url));
+      return NextResponse.redirect(new URL("/account/setUserInfo", request.url));
     }
 
     return response;
