@@ -31,8 +31,8 @@ const SetUserInfoComponent = ({
     });
 
     if (insertError) {
-      if (insertError.code === '23505') {
-        setUsernameError("Username already exists")
+      if (insertError.code === "23505") {
+        setUsernameError("Username already exists");
         usernameRef.current.value = "";
         return;
       }
@@ -47,7 +47,14 @@ const SetUserInfoComponent = ({
     <>
       <div className={styles.container}>
         <form onSubmit={setUpHandler} className={styles.form}>
-          <TextInput ref={usernameRef} placeholder="Username" error={usernameError} onChange={() => {setUsernameError(null)}} />
+          <TextInput
+            ref={usernameRef}
+            placeholder="Username"
+            error={usernameError}
+            onChange={() => {
+              setUsernameError(null);
+            }}
+          />
           <Button fullWidth mt="lg" type="submit">
             Complete
           </Button>
@@ -56,7 +63,7 @@ const SetUserInfoComponent = ({
         <div className={styles.anchors}>
           <Anchor
             mt="lg"
-            href="/dashboard"
+            href="/auth/mypage"
             className={styles.anchor}
             target="_self"
           >

@@ -6,35 +6,43 @@ export async function middleware(request: NextRequest) {
   const supabaseAdmin = createAdmin();
   const { response, supabase } = updateSession(request);
   const { pathname: requestPath } = request.nextUrl;
-  
+
   const user = await supabase.auth.getUser().then(({ data }: any) => data.user);
   const sendToAuth = () =>
-  NextResponse.redirect(new URL("/auth/signin", request.url));
+    NextResponse.redirect(new URL("/auth/signin", request.url));
 
   if (user) {
-    // auth로 시작하는 url에 user가 있으면 이 있으면, account/mypage로
+    // If the user is at a URL that starts with auth
     if (requestPath.startsWith("/auth")) {
       return NextResponse.redirect(new URL("/account/mypage", request.url));
     }
 
     // check username
     const { data: usernameData, error: usernameError } = await supabaseAdmin
-    .from("users")
-    .select("username")
-    .eq("id", user.id);
+      .from("users")
+      .select("username")
+      .eq("id", user.id);
 
-    if(usernameError) {
+    if (usernameError) {
       console.log(usernameError);
       return;
     }
 
     if (!usernameData.length) {
-      return NextResponse.redirect(new URL("/account/setUserInfo", request.url));
+      if (
+        requestPath.startsWith("/account/setUserInfo") ||
+        requestPath.startsWith("/account/mypage")
+      ) {
+        return response;
+      }
+      return NextResponse.redirect(
+        new URL("/account/setUserInfo", request.url)
+      );
     }
 
     return response;
   } else {
-    // auth로 시작하는 url에 user가 없으면 그대로 넘김
+    // If the user is not at a URL that starts with auth
     if (requestPath.startsWith("/auth")) return response;
     return sendToAuth();
   }

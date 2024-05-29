@@ -76,7 +76,7 @@ const DashboardPage = async () => {
       </div>
 
       <div className="fixed-bottom">
-        <div className="amount">
+        <div className="pay-amount">
           <span>$ 0.00</span>
         </div>
       </div>
