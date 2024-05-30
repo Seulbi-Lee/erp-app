@@ -1,10 +1,11 @@
+import "server-only";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { Metadata } from "next";
-import StoreScheduleComponent from "./scheduleComponent";
+import StoreScheduleComponent from "./storeScheduleComponent";
 
 export const metadata: Metadata = {
-  title: "dashboard · planify",
+  title: "schedule · planify",
 };
 
 const StoreSchedulePage = async () => {
