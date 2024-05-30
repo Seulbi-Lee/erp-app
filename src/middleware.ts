@@ -38,6 +38,10 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(
         new URL("/account/setUserInfo", request.url)
       );
+    } else {
+      if (requestPath.startsWith("/account/setUserInfo")) {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+      }
     }
 
     return response;
