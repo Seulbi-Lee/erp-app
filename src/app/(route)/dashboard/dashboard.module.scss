@@ -31,6 +31,13 @@
       align-items: center;
     }
 
+    .storename {
+      font-weight: 600;
+      border-bottom: 1px solid $color-border;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
     .select-time {
       display: flex;
       align-items: flex-end;

@@ -2,19 +2,30 @@
 
 import { UnstyledButton, Button, Select, ActionIcon, rem } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
-import styles from "@/app/(route)/dashboard/dashboard.module.scss";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IconClock, IconX } from "@tabler/icons-react";
-import { FC, PropsWithChildren, useRef } from "react";
-import { useForm } from "@mantine/form";
+import { FormEvent, useRef } from "react";
 
-const DailyScheduleComponent: FC<PropsWithChildren> = ({}: {}) => {
+const DailyScheduleComponent = ({
+  storeData,
+  memberData,
+}: {
+  storeData: { storename: string }[];
+  memberData:
+    | { user_id: string; users: { username: string | null } | null }[]
+    | null
+    | any[];
+}) => {
   const startTimeRef = useRef<HTMLInputElement>(null);
   const endTimeRef = useRef<HTMLInputElement>(null);
+  const memberRef = useRef<string | null>(null);
+
   const searchParams = useSearchParams();
   const route = useRouter();
 
   const date = searchParams.get("date");
+  const storeId = "8863577c-4b0d-4da0-b861-7da685b5a471";
+  const storename = storeData[0].storename;
 
   const startTimePicker = (
     <ActionIcon
@@ -36,6 +47,42 @@ const DailyScheduleComponent: FC<PropsWithChildren> = ({}: {}) => {
     </ActionIcon>
   );
 
+  const insertHandler = async (e: FormEvent) => {
+    e.preventDefault();
+    if (
+      !startTimeRef.current?.value ||
+      !endTimeRef.current?.value ||
+      !memberRef.current
+    )
+      return;
+
+    const memberId = memberRef.current;
+    const startTime = startTimeRef.current.value;
+    const endTime = endTimeRef.current.value;
+
+    const res = await fetch("/api/setDailySchedule", {
+      method: "POST",
+      body: JSON.stringify({
+        date: date,
+        storeId: storeId,
+        storename: storename,
+        memberId: memberId,
+        startTime: startTime,
+        endTime: endTime,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+
+    const data = await res.json();
+
+    console.log(data);
+  };
+
+  if (!memberData) return;
+
   return (
     <>
       <div className="container-inner">
@@ -50,19 +97,22 @@ const DailyScheduleComponent: FC<PropsWithChildren> = ({}: {}) => {
             <IconX stroke={2} />
           </UnstyledButton>
         </div>
-        <form>
-          <Select
-            placeholder="Select Store"
-            data={["store1", "store2"]}
-            defaultValue="store1"
-            allowDeselect={false}
-          />
+
+        <div className="storename">{storename}</div>
+
+        <form onSubmit={insertHandler}>
           <Select
             placeholder="Select Employee"
-            data={["p1", "p2", "p3", "p4"]}
-            defaultValue="p1"
+            data={memberData.map((member, index) => {
+              return {
+                value: member.user_id,
+                label: member.users?.username,
+                index: index,
+              };
+            })}
+            defaultValue={memberData[0].users?.username}
+            onChange={(_val) => (memberRef.current = _val)}
             allowDeselect={false}
-            mt="md"
           />
           <TimeInput
             label="Start"
@@ -76,7 +126,7 @@ const DailyScheduleComponent: FC<PropsWithChildren> = ({}: {}) => {
             rightSection={endTimePicker}
             mt="sm"
           />
-          <Button mt="md" fullWidth>
+          <Button mt="md" type="submit" fullWidth>
             + add
           </Button>
         </form>

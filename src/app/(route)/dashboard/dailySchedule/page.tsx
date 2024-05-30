@@ -10,35 +10,36 @@ export const metadata: Metadata = {
 };
 
 const DailySchedulePage = async () => {
-  const supabase = createServer();
+  // const supabase = createServer();
   const supabaseAdmin = createAdmin();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  if (!user) return;
-  console.log(user.id);
+  // if (!user) return;
+  // console.log(user.id);
 
-  // stores 에서 내가 속한 store의 id, storename 가져오기
+  const storeId = "8863577c-4b0d-4da0-b861-7da685b5a471";
+
+  // stores 에서 storename 가져오기
   const { data: storeData, error: storeError } = await supabaseAdmin
-    .from("store_members")
-    .select("store_id, stores(storename)")
-    .eq("user_id", user.id);
+    .from("stores")
+    .select("storename")
+    .eq("id", storeId);
 
-  console.log(storeData);
   if (storeError) {
     console.log(storeError);
     return;
   }
 
-  DateTime.now().toISOTime({includeOffset:false})
+  console.log(DateTime.now().toISOTime({ includeOffset: false }));
 
-  // store_members 에서 내가 속한 store의 store_id 를 가진 user_id와 users(username) 가져오기
+  // store_members 에서 user_id와 users(username) 가져오기
   const { data: memberData, error: memberError } = await supabaseAdmin
     .from("store_members")
     .select("user_id, users!store_members_user_id_fkey(username)")
-    .eq("store_id", storeData[0].store_id)
+    .eq("store_id", storeId);
 
   /**
    * SELECT user_id users.username FROM store_members
@@ -46,10 +47,11 @@ const DailySchedulePage = async () => {
    * WHERE store_members.store_id = fjlsadf
    */
 
-  console.log(memberData, memberError)
+  console.log(memberData, memberError);
+
   return (
     <>
-      <DailyScheduleComponent />
+      <DailyScheduleComponent storeData={storeData} memberData={memberData} />
     </>
   );
 };
