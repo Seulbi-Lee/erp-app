@@ -1,5 +1,5 @@
 import { getDailySchedule } from "@/app/api/getDailySchedule";
-import CalendarComponent from "../../../dashboard/calendar/CalendarComponent";
+import CalendarComponent from "../../../../shared/calendar/CalendarComponent";
 import NavComponent from "../../navComponent";
 
 const StoreScheduleComponent = async () => {
@@ -9,7 +9,7 @@ const StoreScheduleComponent = async () => {
     <>
       <div className="schedule">
         <div className="content">
-          <CalendarComponent dailySchedule={dailySchedule}/>
+          <CalendarComponent dailySchedule={dailySchedule} />
         </div>
 
         <div className="fixed-bottom">

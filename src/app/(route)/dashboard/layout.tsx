@@ -1,4 +1,4 @@
-import styles from "@/app/(route)/dashboard/dashboard.module.scss";
+import styles from "@/app/(route)/dashboard/main.module.scss";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { Metadata } from "next";

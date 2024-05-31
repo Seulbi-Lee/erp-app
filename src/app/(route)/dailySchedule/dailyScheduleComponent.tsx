@@ -59,7 +59,7 @@ const DailyScheduleComponent = ({
     const memberId = memberRef.current;
     const startTime = startTimeRef.current.value;
     const endTime = endTimeRef.current.value;
-    
+
     // zod 쓰기
     const res = await fetch("/api/setDailySchedule", {
       method: "POST",

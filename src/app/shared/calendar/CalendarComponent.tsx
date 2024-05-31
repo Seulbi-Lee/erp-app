@@ -36,7 +36,7 @@ const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
   return (
     <>
       <div className={styles.calendar}>
-        <Button onClick={testFn}>Click Me!</Button>
+        {/* <Button onClick={testFn}>Click Me!</Button> */}
 
         <section className="header-section">
           <CalendarHeaderComponent

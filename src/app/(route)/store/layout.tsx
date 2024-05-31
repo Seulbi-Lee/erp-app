@@ -1,4 +1,4 @@
-import Link from "next/link";
+import styles from "@/app/(route)/dashboard/main.module.scss";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { getStores } from "@/app/api/getStores";
@@ -27,11 +27,13 @@ const DashboardPage = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <StoreHeaderComponent
-        username={userData?.username}
-        storeData={storeData}
-      />
-      {children}
+      <div className={styles.container}>
+        <StoreHeaderComponent
+          username={userData?.username}
+          storeData={storeData}
+        />
+        {children}
+      </div>
     </>
   );
 };

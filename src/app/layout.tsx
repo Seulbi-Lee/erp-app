@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-import "@/app/main.scss";
+import "@/app/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 

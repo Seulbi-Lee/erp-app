@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { getStores } from "@/app/api/getStores";
-import CalendarComponent from "./calendar/CalendarComponent";
+import CalendarComponent from "../../shared/calendar/CalendarComponent";
 import { Metadata } from "next";
 import { getDailySchedule } from "@/app/api/getDailySchedule";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const DashboardPage = async () => {
   const storeData = await getStores(); //api
-  const dailySchedule = await getDailySchedule();  
+  const dailySchedule = await getDailySchedule();
 
   const supabaseAuth = createServer();
   const supabase = createAdmin();
@@ -51,7 +51,7 @@ const DashboardPage = async () => {
 
       <div className="main">
         <div className="content">
-          <CalendarComponent dailySchedule={dailySchedule}/>
+          <CalendarComponent dailySchedule={dailySchedule} />
 
           <div className="container-inner">
             {storeData &&

@@ -18,7 +18,7 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   const date = dateTime.toFormat("yyyy-MM-dd");
 
   const dailyScheduleHandler = () => {
-    route.push("/dashboard/dailySchedule?date=" + date);
+    route.push("/dailySchedule?date=" + date);
   };
 
   return (

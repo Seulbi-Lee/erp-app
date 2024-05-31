@@ -1,4 +1,6 @@
 import "server-only";
+
+import styles from "@/app/(route)/dashboard/main.module.scss";
 import { Metadata } from "next";
 import DailyScheduleComponent from "./dailyScheduleComponent";
 import { createAdmin } from "@/utils/supabase/admin";
@@ -52,8 +54,9 @@ const DailySchedulePage = async () => {
 
   return (
     <>
-      
-      <DailyScheduleComponent storeData={storeData} memberData={memberData} />
+      <div className={styles.container}>
+        <DailyScheduleComponent storeData={storeData} memberData={memberData} />
+      </div>
     </>
   );
 };
