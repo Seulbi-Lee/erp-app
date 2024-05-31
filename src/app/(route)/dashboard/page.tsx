@@ -5,6 +5,7 @@ import { createServer } from "@/utils/supabase/server";
 import { getStores } from "@/app/api/getStores";
 import CalendarComponent from "./calendar/CalendarComponent";
 import { Metadata } from "next";
+import { getDailySchedule } from "@/app/api/getDailySchedule";
 
 export const metadata: Metadata = {
   title: "dashboard · planify",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 
 const DashboardPage = async () => {
   const storeData = await getStores(); //api
+  const dailySchedule = await getDailySchedule();  
 
   const supabaseAuth = createServer();
   const supabase = createAdmin();
@@ -49,15 +51,15 @@ const DashboardPage = async () => {
 
       <div className="main">
         <div className="content">
-          <CalendarComponent />
+          <CalendarComponent dailySchedule={dailySchedule}/>
 
           <div className="container-inner">
             {storeData &&
-              storeData.map((store, index: number) => {
+              storeData.map((store) => {
                 return (
                   <Link
-                    href={"/dashboard/store/schedule?id=" + store.store_id}
-                    key={index}
+                    href={`/store/${store.store_id}/schedule`}
+                    key={store.store_id}
                   >
                     <Button fullWidth type="button" mt="sm">
                       {store.stores?.storename}

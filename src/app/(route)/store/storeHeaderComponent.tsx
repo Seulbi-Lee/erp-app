@@ -2,7 +2,7 @@
 
 import { Select } from "@mantine/core";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 const StoreHeaderComponent = ({
   username,
@@ -11,9 +11,9 @@ const StoreHeaderComponent = ({
   username: string | undefined | null;
   storeData: any[];
 }) => {
-  const searchParams = useSearchParams();
-  const route = useRouter();
-  const storeId = searchParams.get("id");
+  const params = useParams();
+  const router = useRouter();
+  const storeId = params["storeId"] as string;
 
   return (
     <>
@@ -21,16 +21,15 @@ const StoreHeaderComponent = ({
         <Link href={"/dashboard"}>HOME</Link>
         <Select
           placeholder="Select Store"
-          defaultValue="store1"
-          data={storeData.map((store, index) => {
+          defaultValue={storeId}
+          data={storeData.map((store) => {
             return {
-              value: "/dashboard/store/schedule?id=" + store.store_id,
-              label: store.stores?.storename,
-              index: index,
+              value: store.store_id,
+              label: store.stores?.storename
             };
           })}
           allowDeselect={false}
-          onChange={(_value, option) => route.push(option.value)}
+          onChange={(value) => router.push(`/store/${value}/schedule`)}
         />
 
         <Link href="/account/mypage">{username}</Link>

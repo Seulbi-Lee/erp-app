@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren, useState } from "react";
+"use Client";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +12,7 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   dateTime,
   isCurrMonth,
 }) => {
-  const [schedule, setSchedule] = useState<string[] | null>(null);
+  const [schedule, setSchedule] = useState<any[] | null>(null);
 
   const route = useRouter();
   const date = dateTime.toFormat("yyyy-MM-dd");
@@ -23,14 +24,14 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   return (
     <>
       <div
-        className={"date" + isCurrMonth ? "" : " out-month"}
+        className={isCurrMonth ? "date" : "date out-month"}
         onClick={dailyScheduleHandler}
       >
         {dateTime.day}
-        {schedule?.map((todo, index) => {
+        {schedule?.map((data, index) => {
           return (
             <div key={index}>
-              <span>{todo}</span>
+              <span>{data}</span>
             </div>
           );
         })}

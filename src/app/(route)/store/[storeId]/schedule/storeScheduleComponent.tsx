@@ -1,12 +1,15 @@
-import CalendarComponent from "../../calendar/CalendarComponent";
-import NavComponent from "../navComponent";
+import { getDailySchedule } from "@/app/api/getDailySchedule";
+import CalendarComponent from "../../../dashboard/calendar/CalendarComponent";
+import NavComponent from "../../navComponent";
 
 const StoreScheduleComponent = async () => {
+  const dailySchedule = await getDailySchedule();
+
   return (
     <>
       <div className="schedule">
         <div className="content">
-          <CalendarComponent />
+          <CalendarComponent dailySchedule={dailySchedule}/>
         </div>
 
         <div className="fixed-bottom">

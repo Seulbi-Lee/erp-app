@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   console.log(data);
 
   const { error: insertError } = await supabaseAdmin.from("schedules").insert({
-    store_id: data.store_id,
+    store_id: data.storeId,
     user_id: data.memberId,
     date: data.date,
     start: data.startTime,
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (insertError) {
-    return NextResponse.error();
+    return NextResponse.json(insertError, {status:400});
   }
 
   return NextResponse.json("success");

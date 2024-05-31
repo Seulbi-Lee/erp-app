@@ -4,6 +4,7 @@ import DailyScheduleComponent from "./dailyScheduleComponent";
 import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { DateTime } from "luxon";
+import { constrainedMemory } from "process";
 
 export const metadata: Metadata = {
   title: "daily schedule · planify",
@@ -33,7 +34,7 @@ const DailySchedulePage = async () => {
     return;
   }
 
-  console.log(DateTime.now().toISOTime({ includeOffset: false }));
+  // console.log(DateTime.now().toISOTime({ includeOffset: false }));
 
   // store_members 에서 user_id와 users(username) 가져오기
   const { data: memberData, error: memberError } = await supabaseAdmin
@@ -47,10 +48,11 @@ const DailySchedulePage = async () => {
    * WHERE store_members.store_id = fjlsadf
    */
 
-  console.log(memberData, memberError);
+  // console.log(memberData, memberError);
 
   return (
     <>
+      
       <DailyScheduleComponent storeData={storeData} memberData={memberData} />
     </>
   );
