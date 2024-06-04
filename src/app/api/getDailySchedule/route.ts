@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDailySchedule } from ".";
 
 export async function POST(req: NextRequest) {
-  console.log("HERE!", await req.json())
-  return NextResponse.json(await getDailySchedule());
+  // get date data from CalendarComponent
+  const monthData = await req.json();
+
+  return NextResponse.json(await getDailySchedule(monthData));
 }

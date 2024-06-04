@@ -21,7 +21,7 @@ const DailyScheduleComponent = ({
   const memberRef = useRef<string | null>(null);
 
   const searchParams = useSearchParams();
-  const route = useRouter();
+  const router = useRouter();
 
   const date = searchParams.get("date");
   const storeId = "8863577c-4b0d-4da0-b861-7da685b5a471";
@@ -80,6 +80,10 @@ const DailyScheduleComponent = ({
     const data = await res.json();
 
     console.log(data);
+
+    alert("Saved");
+
+    router.back();
   };
 
   if (!memberData) return;
@@ -91,7 +95,7 @@ const DailyScheduleComponent = ({
           <div>{date}</div>
           <UnstyledButton
             type="button"
-            onClick={() => route.back()}
+            onClick={() => router.back()}
             variant="default"
             size="xs"
           >

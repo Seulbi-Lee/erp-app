@@ -5,25 +5,32 @@ import CalendarDateComponent from "./calendarDate.component";
 type CalendarMonthProps = {
   year: number;
   month: number;
+  schedule: any[];
 };
 
-const CalendarMonthComponent: FC<
-  PropsWithChildren<CalendarMonthProps>
-> = ({ year, month }) => {
+const CalendarMonthComponent: FC<PropsWithChildren<CalendarMonthProps>> = ({
+  year,
+  month,
+  schedule,
+}) => {
   return (
     <>
-      {makeWeekRows(year, month).map((weekRow, week) => (
+      {makeWeekRows(year, month, schedule).map((weekRow, week) => (
         <div key={week} className="week-row">
           {weekRow}
         </div>
       ))}
     </>
-  )
+  );
 };
 
 export default CalendarMonthComponent;
 
-function makeWeekRows(year: number, month: number): ReactNode[][] {
+function makeWeekRows(
+  year: number,
+  month: number,
+  schedule: any[]
+): ReactNode[][] {
   const day1 = DateTime.local(year, month, 1).weekday;
   let date = DateTime.local(year, month, 1).minus({
     days: day1 === 7 ? 0 : day1,
@@ -39,7 +46,8 @@ function makeWeekRows(year: number, month: number): ReactNode[][] {
           key={date.day}
           dateTime={date}
           isCurrMonth={date.month === month}
-        />,
+          schedule={schedule}
+        />
       );
       date = date.plus({ day: 1 });
     }

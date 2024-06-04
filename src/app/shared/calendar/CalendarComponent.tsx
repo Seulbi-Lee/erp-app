@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarHeaderComponent } from "./calendarHeader.component";
 import styles from "./calendar.style.module.scss";
 import { DateTime } from "luxon";
 import CalendarMonthComponent from "./calendarMonth.component";
 import { Button } from "@mantine/core";
+import {
+  useScheduleAction,
+  useScheduleStore,
+} from "@/app/contexts/schedule.provider";
+import { groupMapBy } from "@/utils/array.util";
 
-const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
+const CalendarComponent = () => {
+  // const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
   const [year, setYear] = useState<number>(DateTime.now().year);
   const [month, setMonth] = useState<number>(DateTime.now().month);
+  const [schedule, setSchedule] = useState<any | null>(null);
 
   const goToRelativeMonth = (months: number) => {
     months = Math.floor(months);
@@ -20,24 +27,21 @@ const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
     setMonth(newDate.month);
   };
 
-  console.log(dailySchedule);
-
-  const testFn = () => {
+  useEffect(() => {
     fetch("/api/getDailySchedule", {
       method: "post",
-      body: JSON.stringify({ hello: "world" }),
+      body: JSON.stringify({ year: year, month: month }),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("response!", data);
+        setSchedule(data);
+        // setSchedule(groupMapBy(data, (value: any) => value.date));
       });
-  };
+  }, [year, month]);
 
   return (
     <>
       <div className={styles.calendar}>
-        {/* <Button onClick={testFn}>Click Me!</Button> */}
-
         <section className="header-section">
           <CalendarHeaderComponent
             year={year}
@@ -57,7 +61,11 @@ const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
             <div className="day">Sat</div>
           </div>
 
-          <CalendarMonthComponent year={year} month={month} />
+          <CalendarMonthComponent
+            year={year}
+            month={month}
+            schedule={schedule}
+          />
         </section>
       </div>
     </>

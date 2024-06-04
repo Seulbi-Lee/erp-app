@@ -1,15 +1,13 @@
 import { getDailySchedule } from "@/app/api/getDailySchedule";
-import CalendarComponent from "../../../../shared/calendar/CalendarComponent";
 import NavComponent from "../../navComponent";
+import CalendarRoot from "@/app/shared/calendar/calenderRoot";
 
 const StoreScheduleComponent = async () => {
-  const dailySchedule = await getDailySchedule();
-
   return (
     <>
       <div className="schedule">
         <div className="content">
-          <CalendarComponent dailySchedule={dailySchedule} />
+          <CalendarRoot />
         </div>
 
         <div className="fixed-bottom">

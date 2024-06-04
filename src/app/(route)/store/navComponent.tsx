@@ -10,10 +10,10 @@ const NavComponent = () => {
   return (
     <>
       <nav className="fixed-nav">
-        <Link href={"/dashboard/store/schedule?id=" + storeId}>Schedule</Link>
-        <Link href={"/dashboard/store/stock" + storeId}>Stock</Link>
-        <Link href={"/dashboard/store/todo" + storeId}>Todo</Link>
-        <Link href={"/dashboard/store/notice" + storeId}>Notice</Link>
+        <Link href={`/store/${storeId}/schedule`}>Schedule</Link>
+        <Link href={`/store/${storeId}/stock`}>Stock</Link>
+        <Link href={`/store/${storeId}/todo`}>Todo</Link>
+        <Link href={`/store/${storeId}/notice`}>Notice</Link>
       </nav>
     </>
   );
