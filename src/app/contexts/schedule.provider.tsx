@@ -8,21 +8,14 @@ import {
   useState,
 } from "react";
 
-const scheduleStore = createContext<any | undefined>(undefined);
-const scheduleAction = createContext<any | undefined>(undefined);
+const scheduleContext = createContext<any>({ undefined });
 
-export const useScheduleStore = () => {
-  const context = useContext(scheduleStore);
+export const useScheduleContext = () => {
+  const context = useContext(scheduleContext);
   if (context === undefined) {
-    throw new Error("useScheduleStore must be used within a scheduleProvider");
-  }
-  return context;
-};
-
-export const useScheduleAction = () => {
-  const context = useContext(scheduleAction);
-  if (context === undefined) {
-    throw new Error("useScheduleAction must be used within a scheduleProvider");
+    throw new Error(
+      "useScheduleContext must be used within a scheduleProvider"
+    );
   }
   return context;
 };
@@ -32,11 +25,9 @@ const ScheduleProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <scheduleStore.Provider value={store}>
-        <scheduleAction.Provider value={action}>
-          {children}
-        </scheduleAction.Provider>
-      </scheduleStore.Provider>
+      <scheduleContext.Provider value={{ store, action }}>
+        {children}
+      </scheduleContext.Provider>
     </>
   );
 };

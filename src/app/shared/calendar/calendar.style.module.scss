@@ -39,12 +39,17 @@
 
         .date {
           width: calc(100% / 7);
-          padding: 0.5rem 0.5rem 3rem 0.5rem;
+          min-height: 5rem;
+          padding: 0.5rem 0.5rem 1rem 0.5rem;
           cursor: pointer;
           font-size: $font-xs;
 
           &.out-month {
             color: $color-secondary-text;
+          }
+
+          .daily-schedule {
+            margin-top: 0.5rem;
           }
         }
       }

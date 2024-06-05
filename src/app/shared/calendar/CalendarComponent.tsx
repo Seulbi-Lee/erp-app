@@ -6,17 +6,14 @@ import styles from "./calendar.style.module.scss";
 import { DateTime } from "luxon";
 import CalendarMonthComponent from "./calendarMonth.component";
 import { Button } from "@mantine/core";
-import {
-  useScheduleAction,
-  useScheduleStore,
-} from "@/app/contexts/schedule.provider";
+import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { groupMapBy } from "@/utils/array.util";
 
 const CalendarComponent = () => {
-  // const CalendarComponent = ({ dailySchedule }: { dailySchedule: any[] }) => {
   const [year, setYear] = useState<number>(DateTime.now().year);
   const [month, setMonth] = useState<number>(DateTime.now().month);
-  const [schedule, setSchedule] = useState<any | null>(null);
+
+  const { store: scheduleData, action: scheduleAction } = useScheduleContext();
 
   const goToRelativeMonth = (months: number) => {
     months = Math.floor(months);
@@ -34,7 +31,7 @@ const CalendarComponent = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setSchedule(data);
+        scheduleAction(data);
         // setSchedule(groupMapBy(data, (value: any) => value.date));
       });
   }, [year, month]);
@@ -61,11 +58,7 @@ const CalendarComponent = () => {
             <div className="day">Sat</div>
           </div>
 
-          <CalendarMonthComponent
-            year={year}
-            month={month}
-            schedule={schedule}
-          />
+          <CalendarMonthComponent year={year} month={month} />
         </section>
       </div>
     </>

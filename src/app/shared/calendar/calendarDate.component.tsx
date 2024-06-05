@@ -2,26 +2,20 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import { useRouter } from "next/navigation";
-import { useScheduleStore } from "@/app/contexts/schedule.provider";
+import { useScheduleContext } from "@/app/contexts/schedule.provider";
 
 type CalendarDateProps = {
   dateTime: DateTime;
   isCurrMonth: boolean;
-  schedule: any[];
 };
 
 const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   dateTime,
   isCurrMonth,
-  schedule,
 }) => {
-  const [dailySchedule, setDailySchedule] = useState<any[] | null>(schedule);
+  const { store: scheduleData } = useScheduleContext();
 
-  console.log(schedule?.[0]);
-
-  useEffect(() => {
-    setDailySchedule(schedule);
-  }, [schedule]);
+  console.log(scheduleData);
 
   const route = useRouter();
   const date = dateTime.toFormat("yyyy-MM-dd");
@@ -37,10 +31,10 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
         onClick={dailyScheduleHandler}
       >
         {dateTime.day}
-        {schedule?.map((data, index) => {
+        {scheduleData?.map((data: any, index: number) => {
           if (date === data.date) {
             return (
-              <div key={index}>
+              <div key={index} className="daily-schedule">
                 <span>
                   {data.start.slice(0, 5)} ~ {data.end.slice(0, 5)}
                 </span>
