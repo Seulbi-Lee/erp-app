@@ -23,17 +23,8 @@ export async function POST(req: NextRequest) {
   const endDateTime = DateTime.fromISO(data.endTime);
 
   const workMin = endDateTime.diff(startDateTime, "minute").minutes;
-
-  const startTime =
-    data.startTime.slice(0, 2) * 60 + data.startTime.slice(2, 2);
-  const endTime = data.endTime.slice(0, 2) * 60 + data.startTime.slice(2, 2);
-  console.log(workMin, endTime - startTime);
   const payPerMin = userData.hourly_rate ? userData.hourly_rate / 60 : null;
-  const amounts = payPerMin
-    ? ((endTime - startTime) * payPerMin).toFixed(2)
-    : null;
-
-  console.log(startTime, endTime, payPerMin, amounts);
+  const amounts = payPerMin ? (workMin * payPerMin).toFixed(2) : null;
 
   const { error: insertError } = await supabaseAdmin.from("schedules").insert({
     store_id: data.storeId,
