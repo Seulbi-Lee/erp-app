@@ -15,8 +15,6 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
 }) => {
   const { store: scheduleData } = useScheduleContext();
 
-  console.log(scheduleData);
-
   const route = useRouter();
   const date = dateTime.toFormat("yyyy-MM-dd");
 

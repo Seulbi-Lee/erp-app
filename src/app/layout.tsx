@@ -4,6 +4,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@/app/app.scss";
+import ScheduleProvider from "./contexts/schedule.provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider>
-          <main>{children}</main>
+          <ScheduleProvider>
+            <main>{children}</main>
+          </ScheduleProvider>
         </MantineProvider>
       </body>
     </html>

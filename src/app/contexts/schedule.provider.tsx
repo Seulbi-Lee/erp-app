@@ -1,8 +1,7 @@
+"use client";
 import {
-  Dispatch,
   FC,
   PropsWithChildren,
-  SetStateAction,
   createContext,
   useContext,
   useState,
@@ -22,6 +21,8 @@ export const useScheduleContext = () => {
 
 const ScheduleProvider: FC<PropsWithChildren> = ({ children }) => {
   const [store, action] = useState([]);
+
+  console.log(store);
 
   return (
     <>

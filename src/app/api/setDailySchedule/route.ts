@@ -1,4 +1,5 @@
 import { createAdmin } from "@/utils/supabase/admin";
+import { DateTime } from "luxon";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -18,9 +19,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(userError, { status: 400 });
   }
 
+  const startDateTime = DateTime.fromISO(data.startTime);
+  const endDateTime = DateTime.fromISO(data.endTime);
+
+  const workMin = endDateTime.diff(startDateTime, "minute").minutes;
+
   const startTime =
     data.startTime.slice(0, 2) * 60 + data.startTime.slice(2, 2);
   const endTime = data.endTime.slice(0, 2) * 60 + data.startTime.slice(2, 2);
+  console.log(workMin, endTime - startTime);
   const payPerMin = userData.hourly_rate ? userData.hourly_rate / 60 : null;
   const amounts = payPerMin
     ? ((endTime - startTime) * payPerMin).toFixed(2)

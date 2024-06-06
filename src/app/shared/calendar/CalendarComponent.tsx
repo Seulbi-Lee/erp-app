@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarHeaderComponent } from "./calendarHeader.component";
 import styles from "./calendar.style.module.scss";
 import { DateTime } from "luxon";
 import CalendarMonthComponent from "./calendarMonth.component";
-import { Button } from "@mantine/core";
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { groupMapBy } from "@/utils/array.util";
 
@@ -32,9 +31,9 @@ const CalendarComponent = () => {
       .then((res) => res.json())
       .then((data) => {
         scheduleAction(data);
-        // setSchedule(groupMapBy(data, (value: any) => value.date));
+        // scheduleAction(groupMapBy(data, (value: any) => value.date));
       });
-  }, [year, month]);
+  }, [year, month, scheduleAction]);
 
   return (
     <>

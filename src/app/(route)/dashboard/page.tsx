@@ -4,8 +4,9 @@ import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { getStores } from "@/app/api/getStores";
 import { Metadata } from "next";
-import { getDailySchedule } from "@/app/api/getDailySchedule";
-import CalendarRoot from "@/app/shared/calendar/calenderRoot";
+import ScheduleProvider from "@/app/contexts/schedule.provider";
+import CalendarComponent from "@/app/shared/calendar/CalendarComponent";
+import AmountComponent from "@/app/shared/amounts/amount.component";
 
 export const metadata: Metadata = {
   title: "dashboard · planify",
@@ -13,7 +14,6 @@ export const metadata: Metadata = {
 
 const DashboardPage = async () => {
   const storeData = await getStores(); //api
-  // const dailySchedule = await getDailySchedule();
 
   const supabaseAuth = createServer();
   const supabase = createAdmin();
@@ -29,20 +29,6 @@ const DashboardPage = async () => {
     .eq("id", user.id)
     .single();
 
-  // const storeData = await fetch("http://localhost:3000/api/getStores", {
-  //   method: 'POST',
-  //   headers: {
-  //     cookies: cookies().toString()
-  //   }
-  // }).then(res => {
-  //   if (!res.ok) {
-  //     console.error(res)
-  //     throw new Error();
-  //   }
-
-  //   return res.json()
-  // })
-
   return (
     <>
       <header className="header">
@@ -51,7 +37,7 @@ const DashboardPage = async () => {
 
       <div className="main">
         <div className="content">
-          <CalendarRoot />
+          <CalendarComponent />
 
           <div className="container-inner">
             {storeData &&
@@ -78,9 +64,7 @@ const DashboardPage = async () => {
       </div>
 
       <div className="fixed-bottom">
-        <div className="pay-amount">
-          <span>$ 0.00</span>
-        </div>
+        <AmountComponent />
       </div>
     </>
   );

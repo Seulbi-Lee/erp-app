@@ -1,20 +1,17 @@
-import { getDailySchedule } from "@/app/api/getDailySchedule";
+import CalendarComponent from "@/app/shared/calendar/CalendarComponent";
 import NavComponent from "../../navComponent";
-import CalendarRoot from "@/app/shared/calendar/calenderRoot";
+import AmountComponent from "@/app/shared/amounts/amount.component";
 
 const StoreScheduleComponent = async () => {
   return (
     <>
       <div className="schedule">
         <div className="content">
-          <CalendarRoot />
+          <CalendarComponent />
         </div>
 
         <div className="fixed-bottom">
-          <div className="pay-amount">
-            <span>$ 0.00</span>
-          </div>
-
+          <AmountComponent />
           <NavComponent />
         </div>
       </div>
