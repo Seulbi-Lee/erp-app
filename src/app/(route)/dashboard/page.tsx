@@ -4,7 +4,6 @@ import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { getStores } from "@/app/api/getStores";
 import { Metadata } from "next";
-import ScheduleProvider from "@/app/contexts/schedule.provider";
 import CalendarComponent from "@/app/shared/calendar/CalendarComponent";
 import AmountComponent from "@/app/shared/amounts/amount.component";
 

@@ -1,5 +1,5 @@
 "use Client";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 import { DateTime } from "luxon";
 import { useRouter } from "next/navigation";
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
@@ -29,17 +29,23 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
         onClick={dailyScheduleHandler}
       >
         {dateTime.day}
-        {scheduleData?.map((data: any, index: number) => {
-          if (date === data.date) {
-            return (
-              <div key={index} className="daily-schedule">
-                <span>
-                  {data.start.slice(0, 5)} ~ {data.end.slice(0, 5)}
-                </span>
-              </div>
-            );
+        {scheduleData?.map(
+          (
+            data: { date: string; start: string; amounts: number },
+            index: number
+          ) => {
+            if (date === data.date) {
+              return (
+                <div key={index} className="daily-schedule">
+                  <p>{DateTime.fromISO(data.start).toFormat("HH:mm")}</p>
+                  <p>
+                    <span className="strong">${data.amounts.toFixed(1)}</span>
+                  </p>
+                </div>
+              );
+            }
           }
-        })}
+        )}
       </div>
     </>
   );

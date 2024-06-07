@@ -22,8 +22,6 @@ export const useScheduleContext = () => {
 const ScheduleProvider: FC<PropsWithChildren> = ({ children }) => {
   const [store, action] = useState([]);
 
-  console.log(store);
-
   return (
     <>
       <scheduleContext.Provider value={{ store, action }}>
