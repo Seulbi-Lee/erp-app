@@ -7,12 +7,16 @@ import { DateTime } from "luxon";
 import CalendarMonthComponent from "./calendarMonth.component";
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { groupMapBy } from "@/utils/array.util";
+import { useParams } from "next/navigation";
 
 const CalendarComponent = () => {
   const [year, setYear] = useState<number>(DateTime.now().year);
   const [month, setMonth] = useState<number>(DateTime.now().month);
 
-  const { store: scheduleData, action: scheduleAction } = useScheduleContext();
+  const params = useParams();
+  const storeId = params["storeId"] as string;
+
+  const { refresh: scheduleRefresh } = useScheduleContext();
 
   const goToRelativeMonth = (months: number) => {
     months = Math.floor(months);
@@ -24,16 +28,8 @@ const CalendarComponent = () => {
   };
 
   useEffect(() => {
-    fetch("/api/getDailySchedule", {
-      method: "post",
-      body: JSON.stringify({ year: year, month: month }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        scheduleAction(data);
-        // scheduleAction(groupMapBy(data, (value: any) => value.date));
-      });
-  }, [year, month, scheduleAction]);
+    scheduleRefresh(year, month, storeId);
+  }, [month, year, storeId]);
 
   return (
     <>

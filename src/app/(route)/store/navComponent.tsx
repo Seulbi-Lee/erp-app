@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const NavComponent = () => {
-  const searchParams = useSearchParams();
-  const storeId = searchParams.get("id");
+  const params = useParams();
+  const storeId = params["storeId"];
 
   return (
     <>

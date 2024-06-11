@@ -1,7 +1,7 @@
 "use Client";
 import { FC, PropsWithChildren } from "react";
 import { DateTime } from "luxon";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
 
 type CalendarDateProps = {
@@ -19,7 +19,7 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
   const date = dateTime.toFormat("yyyy-MM-dd");
 
   const dailyScheduleHandler = () => {
-    route.push("/dailySchedule?date=" + date);
+    route.push(`dailySchedule?date=${date}`);
   };
 
   return (

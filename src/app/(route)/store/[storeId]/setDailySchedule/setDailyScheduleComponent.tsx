@@ -2,11 +2,12 @@
 
 import { UnstyledButton, Button, Select, ActionIcon, rem } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { IconClock, IconX } from "@tabler/icons-react";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { DatePickerInput } from "@mantine/dates";
 
-const DailyScheduleComponent = ({
+const SetDailyScheduleComponent = ({
   storeData,
   memberData,
 }: {
@@ -19,12 +20,12 @@ const DailyScheduleComponent = ({
   const startTimeRef = useRef<HTMLInputElement>(null);
   const endTimeRef = useRef<HTMLInputElement>(null);
   const memberRef = useRef<string | null>(null);
+  const [value, setValue] = useState<Date | null>(null);
 
-  const searchParams = useSearchParams();
+  const params = useParams();
   const router = useRouter();
 
-  const date = searchParams.get("date");
-  const storeId = "8863577c-4b0d-4da0-b861-7da685b5a471";
+  const storeId = params["storeId"] as string;
   const storename = storeData[0].storename;
 
   const startTimePicker = (
@@ -64,7 +65,7 @@ const DailyScheduleComponent = ({
     const res = await fetch("/api/setDailySchedule", {
       method: "POST",
       body: JSON.stringify({
-        date: date,
+        // date: date,
         storeId: storeId,
         storename: storename,
         memberId: memberId,
@@ -82,20 +83,19 @@ const DailyScheduleComponent = ({
     console.log(data);
 
     alert("Saved");
-
-    router.back();
   };
 
-  if (!memberData) return;
+  const defaultDate = "2024-01-01";
 
+  if (!memberData) return;
   return (
     <>
       <div className="container-inner">
         <div className="detail-title">
-          <div>{date}</div>
+          <div>{storename}</div>
           <UnstyledButton
             type="button"
-            onClick={() => router.back()}
+            onClick={() => router.push(`/store/${storeId}/schedule`)}
             variant="default"
             size="xs"
           >
@@ -103,10 +103,17 @@ const DailyScheduleComponent = ({
           </UnstyledButton>
         </div>
 
-        <div className="storename">{storename}</div>
-
         <form onSubmit={insertHandler}>
+          <DatePickerInput
+            clearable
+            label="Pick date"
+            placeholder="Pick date"
+            // value={value}
+            defaultValue={new Date()}
+            onChange={setValue}
+          />
           <Select
+            label="Select Employee"
             placeholder="Select Employee"
             data={memberData.map((member, index) => {
               return {
@@ -118,6 +125,7 @@ const DailyScheduleComponent = ({
             defaultValue={memberData[0].users?.username}
             onChange={(_val) => (memberRef.current = _val)}
             allowDeselect={false}
+            mt="sm"
           />
           <TimeInput
             label="Start"
@@ -131,7 +139,7 @@ const DailyScheduleComponent = ({
             rightSection={endTimePicker}
             mt="sm"
           />
-          <Button mt="md" type="submit" fullWidth>
+          <Button mt="xl" type="submit" fullWidth>
             + add
           </Button>
         </form>
@@ -140,4 +148,4 @@ const DailyScheduleComponent = ({
   );
 };
 
-export default DailyScheduleComponent;
+export default SetDailyScheduleComponent;

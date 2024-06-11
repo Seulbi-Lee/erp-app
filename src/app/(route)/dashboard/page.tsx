@@ -1,3 +1,4 @@
+import "server-only";
 import { Button } from "@mantine/core";
 import Link from "next/link";
 import { createAdmin } from "@/utils/supabase/admin";

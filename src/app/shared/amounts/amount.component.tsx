@@ -13,7 +13,7 @@ const AmountComponent = () => {
       tempAmount = tempAmount + data.amounts;
     });
     setAmounts(tempAmount);
-  }, [scheduleData])
+  }, [scheduleData]);
 
   return (
     <>

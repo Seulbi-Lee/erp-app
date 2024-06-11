@@ -1,8 +1,11 @@
 "use client";
 
+import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { Select } from "@mantine/core";
+import { DateTime } from "luxon";
 import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const StoreHeaderComponent = ({
   username,
@@ -11,8 +14,8 @@ const StoreHeaderComponent = ({
   username: string | undefined | null;
   storeData: any[];
 }) => {
-  const params = useParams();
   const router = useRouter();
+  const params = useParams();
   const storeId = params["storeId"] as string;
 
   return (
@@ -25,7 +28,7 @@ const StoreHeaderComponent = ({
           data={storeData.map((store) => {
             return {
               value: store.store_id,
-              label: store.stores?.storename
+              label: store.stores?.storename,
             };
           })}
           allowDeselect={false}

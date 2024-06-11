@@ -4,7 +4,7 @@ import { getDailySchedule } from ".";
 
 export async function POST(req: NextRequest) {
   // get date data from CalendarComponent
-  const monthData = await req.json();
+  const calendarData = await req.json();
 
-  return NextResponse.json(await getDailySchedule(monthData));
+  return NextResponse.json(await getDailySchedule(calendarData));
 }
