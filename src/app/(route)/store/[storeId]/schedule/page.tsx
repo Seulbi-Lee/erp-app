@@ -5,8 +5,8 @@ import { createAdmin } from "@/utils/supabase/admin";
 import { createServer } from "@/utils/supabase/server";
 import { Metadata } from "next";
 import StoreScheduleComponent from "./storeScheduleComponent";
-import StoreHeaderComponent from "../../storeHeaderComponent";
 import { getStores } from "@/app/api/getStores";
+import HeaderComponent from "@/app/shared/header/headerComponent";
 
 export const metadata: Metadata = {
   title: "schedule · planify",
@@ -31,10 +31,7 @@ const StoreSchedulePage = async () => {
   return (
     <>
       <div className={styles.container}>
-        <StoreHeaderComponent
-          username={userData?.username}
-          storeData={storeData}
-        />
+        <HeaderComponent username={userData?.username} storeData={storeData} />
         <StoreScheduleComponent />
       </div>
     </>

@@ -6,8 +6,8 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      padding: 0 0.5rem;
-      margin: 0.5rem 0;
+      padding: 0 20px;
+      margin: 1.5rem 0 1rem;
       gap: 0.5rem;
 
       .year-display {
@@ -50,6 +50,7 @@
 
           .daily-schedule {
             margin-top: 0.5rem;
+            padding-left: 0.1rem;
           }
         }
       }

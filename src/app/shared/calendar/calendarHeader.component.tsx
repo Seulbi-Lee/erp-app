@@ -1,8 +1,7 @@
 import { FC, PropsWithChildren } from "react";
 import { DateTime } from "luxon";
-import { Button } from "@mantine/core";
+import { UnstyledButton } from "@mantine/core";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-
 
 type CalendarHeaderProps = {
   year: number;
@@ -10,11 +9,9 @@ type CalendarHeaderProps = {
   goToRelativeMonth: (months: number) => void;
 };
 
-export const CalendarHeaderComponent: FC<PropsWithChildren<CalendarHeaderProps>> = ({
-  year,
-  month,
-  goToRelativeMonth,
-}) => {
+export const CalendarHeaderComponent: FC<
+  PropsWithChildren<CalendarHeaderProps>
+> = ({ year, month, goToRelativeMonth }) => {
   return (
     <>
       <div className="year-display">
@@ -23,12 +20,20 @@ export const CalendarHeaderComponent: FC<PropsWithChildren<CalendarHeaderProps>>
       <div className="month-display">
         {DateTime.local(year, month).toFormat("MMM")}
       </div>
-      <Button onClick={() => goToRelativeMonth(-1)} variant="default" size="xs">
-        <IconChevronLeft stroke={2} size="16px"/>
-      </Button>
-      <Button onClick={() => goToRelativeMonth(1)} variant="default" size="xs">
-        <IconChevronRight stroke={2} size="16px"/>
-      </Button>
+      <UnstyledButton
+        onClick={() => goToRelativeMonth(-1)}
+        variant="default"
+        size="xs"
+      >
+        <IconChevronLeft stroke={2} size="20px" />
+      </UnstyledButton>
+      <UnstyledButton
+        onClick={() => goToRelativeMonth(1)}
+        variant="default"
+        size="xs"
+      >
+        <IconChevronRight stroke={2} size="20px" />
+      </UnstyledButton>
     </>
   );
 };

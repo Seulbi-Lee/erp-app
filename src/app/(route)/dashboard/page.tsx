@@ -7,6 +7,7 @@ import { getStores } from "@/app/api/getStores";
 import { Metadata } from "next";
 import CalendarComponent from "@/app/shared/calendar/CalendarComponent";
 import AmountComponent from "@/app/shared/amounts/amount.component";
+import HeaderComponent from "@/app/shared/header/headerComponent";
 
 export const metadata: Metadata = {
   title: "dashboard · planify",
@@ -31,9 +32,7 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <header className="header">
-        <Link href="/account/mypage">{userData?.username}</Link>
-      </header>
+      <HeaderComponent username={userData?.username} storeData={storeData} />
 
       <div className="main">
         <div className="content">
