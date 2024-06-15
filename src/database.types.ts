@@ -11,6 +11,7 @@ export type Database = {
     Tables: {
       schedules: {
         Row: {
+          amounts: number | null
           date: string
           end: string
           id: string
@@ -19,6 +20,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          amounts?: number | null
           date: string
           end: string
           id?: string
@@ -27,6 +29,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          amounts?: number | null
           date?: string
           end?: string
           id?: string
@@ -53,6 +56,7 @@ export type Database = {
       }
       store_members: {
         Row: {
+          color: string | null
           created_at: string
           created_by: string
           hourly_rate: number | null
@@ -64,6 +68,7 @@ export type Database = {
           verify: boolean | null
         }
         Insert: {
+          color?: string | null
           created_at?: string
           created_by?: string
           hourly_rate?: number | null
@@ -75,6 +80,7 @@ export type Database = {
           verify?: boolean | null
         }
         Update: {
+          color?: string | null
           created_at?: string
           created_by?: string
           hourly_rate?: number | null
