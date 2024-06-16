@@ -27,23 +27,39 @@ export const getDailySchedule = async (calendarData: {
   if (!storeId) {
     const { data: scheduleData, error: scheduleError } = await supabaseAdmin
       .from("schedules")
-      .select("*, stores(storename)")
+      .select("*, stores(storename, store_members(color))")
       .eq("user_id", user.id)
+      .eq("stores.store_members.user_id", user.id)
       .gte("date", startDate.toISODate())
       .lte("date", endDate.toISODate());
 
     if (scheduleError) {
-      throw new Error();
+      throw new Error(scheduleError.details);
     }
 
-    return scheduleData;
+    const newData = scheduleData.map((data) => {
+      return {
+        id: data.id,
+        date: data.date,
+        start: data.start,
+        end: data.end,
+        user_id: data.user_id,
+        store_id: data.store_id,
+        amounts: data.amounts,
+        storename: data.stores?.storename,
+        color: data.stores?.store_members[0].color,
+      };
+    });
+
+    return newData;
   }
 
   const { data: scheduleData, error: scheduleError } = await supabaseAdmin
     .from("schedules")
-    .select("*, stores(storename)")
+    .select("*, stores(storename, store_members(color))")
     .eq("user_id", user.id)
     .eq("store_id", storeId)
+    .eq("stores.store_members.user_id", user.id)
     .gte("date", startDate.toISODate())
     .lte("date", endDate.toISODate());
 
@@ -51,5 +67,19 @@ export const getDailySchedule = async (calendarData: {
     throw new Error();
   }
 
-  return scheduleData;
+  const newData = scheduleData.map((data) => {
+    return {
+      id: data.id,
+      date: data.date,
+      start: data.start,
+      end: data.end,
+      user_id: data.user_id,
+      store_id: data.store_id,
+      amounts: data.amounts,
+      storename: data.stores?.storename,
+      color: data.stores?.store_members[0].color,
+    };
+  });
+
+  return newData;
 };

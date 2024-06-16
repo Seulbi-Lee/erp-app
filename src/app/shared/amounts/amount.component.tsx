@@ -1,6 +1,7 @@
 "use client";
 
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
+import { NumberFormatter } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 const AmountComponent = () => {
@@ -18,7 +19,12 @@ const AmountComponent = () => {
   return (
     <>
       <div className="pay-amount">
-        <span>$ {amount.toFixed(2)}</span>
+        <NumberFormatter
+          prefix="$ "
+          thousandSeparator
+          value={amount.toFixed(2)}
+          decimalScale={2}
+        />
       </div>
     </>
   );

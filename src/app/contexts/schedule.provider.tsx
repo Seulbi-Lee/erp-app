@@ -51,7 +51,7 @@ const ScheduleProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     refresh(year, month, storeId);
-  }, [year, month, storeId]);
+  }, [storeId]);
 
   return (
     <>
