@@ -1,17 +1,8 @@
 "use client";
 
-import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { Select, rem } from "@mantine/core";
-import { DateTime } from "luxon";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import {
-  AwaitedReactNode,
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode,
-  useEffect,
-} from "react";
 import { IconChevronDown } from "@tabler/icons-react";
 
 const HeaderComponent = ({
