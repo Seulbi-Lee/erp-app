@@ -7,7 +7,9 @@ const DailySchedulePage = () => {
   return (
     <>
       <div className={styles.container}>
-        <DailyScheduleComponent />
+        <div className="container-inner">
+          <DailyScheduleComponent />
+        </div>
       </div>
     </>
   );

@@ -40,7 +40,7 @@ const DashboardPage = async () => {
 
           <div className="container-inner">
             {storeData &&
-              storeData.map((store) => {
+              storeData.map((store: any) => {
                 return (
                   <Link
                     href={`/store/${store.store_id}/schedule`}
