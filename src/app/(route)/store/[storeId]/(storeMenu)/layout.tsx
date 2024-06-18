@@ -1,18 +1,14 @@
 import "server-only";
 
-import styles from "@/app/(route)/dashboard/main.module.scss";
-import { createAdmin } from "@/utils/supabase/admin";
-import { createServer } from "@/utils/supabase/server";
-import { Metadata } from "next";
-import StoreScheduleComponent from "./storeScheduleComponent";
-import { getStores } from "@/app/api/getStores";
+import styles from "@/app/main.module.scss";
 import HeaderComponent from "@/app/shared/header/headerComponent";
+import { createServer } from "@/utils/supabase/server";
+import { createAdmin } from "@/utils/supabase/admin";
+import { getStores } from "@/app/api/getStores";
+import AmountComponent from "@/app/shared/amounts/amount.component";
+import NavComponent from "@/app/shared/nav/navComponent";
 
-export const metadata: Metadata = {
-  title: "schedule · planify",
-};
-
-const StoreSchedulePage = async () => {
+const StoreLayout = async ({ children }: { children: React.ReactNode }) => {
   const supabaseAuth = createServer();
   const supabase = createAdmin();
   const storeData = await getStores();
@@ -32,10 +28,14 @@ const StoreSchedulePage = async () => {
     <>
       <div className={styles.container}>
         <HeaderComponent username={userData?.username} storeData={storeData} />
-        <StoreScheduleComponent />
+        {children}
+        <div className="fixed-bottom">
+          <AmountComponent />
+          <NavComponent />
+        </div>
       </div>
     </>
   );
 };
 
-export default StoreSchedulePage;
+export default StoreLayout;

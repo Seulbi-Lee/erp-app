@@ -1,5 +1,5 @@
 import "server-only";
-import styles from "@/app/(route)/dashboard/main.module.scss";
+import styles from "@/app/main.module.scss";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

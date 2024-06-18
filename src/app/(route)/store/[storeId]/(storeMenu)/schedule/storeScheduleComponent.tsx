@@ -1,5 +1,5 @@
 import CalendarComponent from "@/app/shared/calendar/CalendarComponent";
-import NavComponent from "../../navComponent";
+import NavComponent from "@/app/shared/nav/navComponent";
 import AmountComponent from "@/app/shared/amounts/amount.component";
 
 const StoreScheduleComponent = async () => {
@@ -8,11 +8,6 @@ const StoreScheduleComponent = async () => {
       <div className="schedule">
         <div className="content">
           <CalendarComponent />
-        </div>
-
-        <div className="fixed-bottom">
-          <AmountComponent />
-          <NavComponent />
         </div>
       </div>
     </>

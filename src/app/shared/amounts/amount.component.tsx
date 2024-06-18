@@ -2,11 +2,13 @@
 
 import { useScheduleContext } from "@/app/contexts/schedule.provider";
 import { NumberFormatter } from "@mantine/core";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const AmountComponent = () => {
   const { store: scheduleData } = useScheduleContext();
   const [amount, setAmounts] = useState<number>(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     let tempAmount = 0;
@@ -15,6 +17,9 @@ const AmountComponent = () => {
     });
     setAmounts(tempAmount);
   }, [scheduleData]);
+
+  if (pathname !== "/store/8863577c-4b0d-4da0-b861-7da685b5a471/schedule")
+    return;
 
   return (
     <>

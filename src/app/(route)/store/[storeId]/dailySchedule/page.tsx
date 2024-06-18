@@ -1,6 +1,6 @@
 import "server-only";
 
-import styles from "@/app/(route)/dashboard/main.module.scss";
+import styles from "@/app/main.module.scss";
 import DailyScheduleComponent from "@/app/shared/dailySchedule/dailyScheduleComponent";
 import SetDailyScheduleComponent from "./setDailyScheduleComponent";
 import { createAdmin } from "@/utils/supabase/admin";
