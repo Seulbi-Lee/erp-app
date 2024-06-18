@@ -30,6 +30,8 @@ const DashboardPage = async () => {
     .eq("id", user.id)
     .single();
 
+  console.log(storeData);
+
   return (
     <>
       <HeaderComponent username={userData?.username} storeData={storeData} />
@@ -40,18 +42,30 @@ const DashboardPage = async () => {
 
           <div className="container-inner">
             {storeData &&
-              storeData.map((store: any) => {
-                return (
-                  <Link
-                    href={`/store/${store.store_id}/schedule`}
-                    key={store.store_id}
-                  >
-                    <Button fullWidth type="button" mt="sm">
-                      {store.stores?.storename}
-                    </Button>
-                  </Link>
-                );
-              })}
+              storeData.map(
+                (store: {
+                  store_id: string;
+                  storename: string | undefined;
+                  color: any;
+                }) => {
+                  return (
+                    <Link
+                      href={`/store/${store.store_id}/schedule`}
+                      key={store.store_id}
+                    >
+                      <Button
+                        fullWidth
+                        type="button"
+                        mt="sm"
+                        variant="outline"
+                        color={store.color}
+                      >
+                        {store.storename}
+                      </Button>
+                    </Link>
+                  );
+                }
+              )}
 
             <Link href="/account/addStore" target="_self">
               <Button fullWidth type="button" mt="sm">

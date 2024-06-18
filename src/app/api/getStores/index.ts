@@ -12,7 +12,6 @@ export const getStores = async () => {
 
   if (!user) {
     throw new Error();
-    // return NextResponse.json("no user", { status: 401 });
   }
 
   const {
@@ -22,13 +21,20 @@ export const getStores = async () => {
     statusText,
   } = await supabase
     .from("store_members")
-    .select("store_id, stores(storename)")
+    .select("store_id, color, stores(storename)")
     .eq("user_id", user.id);
+
   if (storeError) {
     throw new Error();
-    // return NextResponse.json(storeError.message, {status, statusText})
   }
 
-  // return NextResponse.json(storeData);
-  return storeData;
+  const newData = storeData.map((data) => {
+    return {
+      store_id: data.store_id,
+      storename: data.stores!.storename,
+      color: data.color,
+    };
+  });
+
+  return newData;
 };

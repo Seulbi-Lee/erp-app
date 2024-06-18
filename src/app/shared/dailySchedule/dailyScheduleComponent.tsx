@@ -40,14 +40,14 @@ const DailyScheduleComponent = () => {
               start: string;
               end: string;
               amounts: string;
-              stores: { storename: string };
+              storename: string;
             },
             index: number
           ) => {
             if (data.date === date) {
               return (
                 <div className="detail-item" key={data.id}>
-                  <div className="store-name">{data.stores.storename}</div>
+                  <div className="store-name">{data.storename}</div>
                   <div className="working-time">
                     {DateTime.fromISO(data.start).toFormat("hh:mm a")} ~{" "}
                     {DateTime.fromISO(data.end).toFormat("hh:mm a")}

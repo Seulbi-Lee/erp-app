@@ -10,7 +10,7 @@ const HeaderComponent = ({
   storeData,
 }: {
   username: string | undefined | null;
-  storeData: any[];
+  storeData: any;
 }) => {
   const router = useRouter();
   const params = useParams();
@@ -31,12 +31,18 @@ const HeaderComponent = ({
           placeholder="Select Store"
           defaultValue={storeId}
           data={[{ value: "dashboard", label: "All Stores" }].concat(
-            storeData.map((store) => {
-              return {
-                value: store.store_id,
-                label: store.stores?.storename,
-              };
-            })
+            storeData.map(
+              (store: {
+                store_id: string;
+                storename: string | undefined;
+                color: any;
+              }) => {
+                return {
+                  value: store.store_id,
+                  label: store.storename,
+                };
+              }
+            )
           )}
           allowDeselect={false}
           onChange={(value) => {
