@@ -24,6 +24,10 @@ const StoreLayout = async ({ children }: { children: React.ReactNode }) => {
     .eq("id", user.id)
     .single();
 
+  if (userError) {
+    throw new Error(userError.details);
+  }
+
   return (
     <>
       <div className={styles.container}>
