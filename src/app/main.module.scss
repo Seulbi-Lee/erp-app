@@ -117,8 +117,56 @@
 
     .new-schedule {
       margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid $color-border;
+      padding: 20px;
+      background-color: $color-bg;
     }
+
+    // s: stock
+    .stock {
+      height: 100%;
+      padding: 3rem 20px 7rem;
+      overflow: auto;
+
+      .top-area {
+        margin-top: 2rem;
+      }
+
+      .stock-list {
+        margin: 1rem 0 2rem 0;
+
+        .item {
+          display: flex;
+          align-items: center;
+          padding: 1rem 0;
+          border-top: 1px solid $color-border;
+
+          .count {
+            width: 5rem;
+            margin-left: auto;
+            input {
+              padding: 0 36px 0 0;
+              text-align: right;
+            }
+          }
+        }
+      }
+
+      .add-list {
+        margin-bottom: 2rem;
+        padding: 20px;
+        background-color: $color-bg;
+      }
+
+      .fixed-button {
+        position: fixed;
+        bottom: 56px;
+        left: 0;
+        width: 100%;
+        padding: 0 20px 20px;
+        z-index: 10;
+        background-color: $color-white;
+      }
+    }
+    // e: stock
   }
 }

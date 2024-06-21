@@ -20,7 +20,7 @@ const AmountComponent = () => {
     setAmounts(tempAmount);
   }, [scheduleData]);
 
-  if (storeId && pathname !== `/store/${storeId}/schedule`) return;
+  if (storeId && pathname !== `/store/${storeId}/schedule`) return null;
 
   return (
     <>

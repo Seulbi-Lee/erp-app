@@ -54,6 +54,77 @@ export type Database = {
           },
         ]
       }
+      stocks: {
+        Row: {
+          id: string
+          min_quantity: number | null
+          name: string
+          price: number | null
+          store_id: string
+        }
+        Insert: {
+          id?: string
+          min_quantity?: number | null
+          name: string
+          price?: number | null
+          store_id: string
+        }
+        Update: {
+          id?: string
+          min_quantity?: number | null
+          name?: string
+          price?: number | null
+          store_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocks_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stocks_history: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          curr_quantity: number
+          id: string
+          stocks_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          curr_quantity?: number
+          id?: string
+          stocks_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          curr_quantity?: number
+          id?: string
+          stocks_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocks_history_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocks_history_stocks_id_fkey"
+            columns: ["stocks_id"]
+            isOneToOne: false
+            referencedRelation: "stocks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       store_members: {
         Row: {
           color: string | null
