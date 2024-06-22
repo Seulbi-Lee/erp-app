@@ -30,12 +30,10 @@ export async function POST(req: NextRequest) {
       quantity: data.currQuantity,
       date: today,
     })
-    .select("*")
-    .single();
 
   if (historyError) {
     return NextResponse.json(historyError, { status: 400 });
   }
 
-  return NextResponse.json({ stockData, historyData });
+  return NextResponse.json("saved");
 }

@@ -39,6 +39,10 @@ const SetStockComponent = () => {
       throw new Error(res.statusText);
     }
 
+    const data = await res.json();
+
+    alert(data);
+
     form.reset();
   };
 
@@ -91,7 +95,7 @@ const SetStockComponent = () => {
       )}
       {!newitem && (
         <Group justify="center" mt="md" mb="lg">
-          <Button onClick={() => setNewItem(true)} type="button">
+          <Button onClick={() => setNewItem(true)} type="button" variant="light">
             new item
           </Button>
         </Group>
