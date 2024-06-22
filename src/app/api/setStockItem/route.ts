@@ -1,7 +1,9 @@
 import { createAdmin } from "@/utils/supabase/admin";
+import { DateTime } from "luxon";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  const today = DateTime.now().toFormat("yyyy-MM-dd");
   const data = await req.json();
   const supabaseAdmin = createAdmin();
 
@@ -11,6 +13,7 @@ export async function POST(req: NextRequest) {
       store_id: data.storeId,
       name: data.itemName,
       min_quantity: data.minQuantity,
+      curr_quantity: data.currQuantity,
       price: data.price,
     })
     .select("*")
@@ -24,7 +27,8 @@ export async function POST(req: NextRequest) {
     .from("stocks_history")
     .insert({
       stocks_id: stockData.id,
-      curr_quantity: data.currQuantity,
+      quantity: data.currQuantity,
+      date: today,
     })
     .select("*")
     .single();
