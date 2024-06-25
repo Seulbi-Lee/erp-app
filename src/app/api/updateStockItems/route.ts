@@ -14,6 +14,19 @@ export async function POST(req: NextRequest) {
   } = await supabaseAuth.auth.getUser();
   if (!user) return;
 
+  // update current quantity
+  data.map(async (item: { id: string; curr_quantity: number }) => {
+    const { error: stocksError } = await supabaseAdmin
+      .from("stocks")
+      .update({ curr_quantity: item.curr_quantity })
+      .eq("id", item.id);
+
+    if (stocksError) {
+      return NextResponse.json(stocksError.details);
+    }
+  });
+
+  // upsert quantity history
   const newData = data.map((item: { id: string; curr_quantity: number }) => {
     return {
       stocks_id: item.id,
@@ -23,14 +36,16 @@ export async function POST(req: NextRequest) {
     };
   });
 
-  const { data: selectData, error: selectError } = await supabaseAdmin
+  const { data: selectData, error: historyError } = await supabaseAdmin
     .from("stocks_history")
-    .upsert(newData)
+    .upsert(newData, { onConflict: "stocks_id, date" })
     .select("");
 
-  if (selectError) {
-    return NextResponse.json(selectError.details);
+  if (historyError) {
+    return NextResponse.json(historyError.details);
   }
+
+  console.log(data);
 
   return NextResponse.json("update completed");
 }

@@ -58,7 +58,7 @@ const StoreStockComponent = () => {
 
     alert(data);
 
-    // location.reload();
+    location.reload();
   };
 
   const updateCurrentQuantity = (
