@@ -56,6 +56,7 @@ export type Database = {
       }
       stocks: {
         Row: {
+          curr_quantity: number | null
           id: string
           min_quantity: number | null
           name: string
@@ -63,6 +64,7 @@ export type Database = {
           store_id: string
         }
         Insert: {
+          curr_quantity?: number | null
           id?: string
           min_quantity?: number | null
           name: string
@@ -70,6 +72,7 @@ export type Database = {
           store_id: string
         }
         Update: {
+          curr_quantity?: number | null
           id?: string
           min_quantity?: number | null
           name?: string
@@ -88,24 +91,24 @@ export type Database = {
       }
       stocks_history: {
         Row: {
-          created_at: string
           created_by: string | null
-          curr_quantity: number
+          date: string
           id: string
+          quantity: number
           stocks_id: string | null
         }
         Insert: {
-          created_at?: string
           created_by?: string | null
-          curr_quantity?: number
+          date: string
           id?: string
+          quantity: number
           stocks_id?: string | null
         }
         Update: {
-          created_at?: string
           created_by?: string | null
-          curr_quantity?: number
+          date?: string
           id?: string
+          quantity?: number
           stocks_id?: string | null
         }
         Relationships: [

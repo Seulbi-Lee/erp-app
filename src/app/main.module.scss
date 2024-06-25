@@ -140,6 +140,13 @@
           padding: 1rem 0;
           border-top: 1px solid $color-border;
 
+          .item-name {
+            input:read-only {
+              border: 0;
+              font-size: $font-md;
+            }
+          }
+
           .count {
             width: 5rem;
             margin-left: auto;

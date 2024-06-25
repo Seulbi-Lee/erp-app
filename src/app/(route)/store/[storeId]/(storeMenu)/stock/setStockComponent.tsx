@@ -43,7 +43,7 @@ const SetStockComponent = () => {
 
     alert(data);
 
-    form.reset();
+    location.reload();
   };
 
   return (
@@ -95,7 +95,11 @@ const SetStockComponent = () => {
       )}
       {!newitem && (
         <Group justify="center" mt="md" mb="lg">
-          <Button onClick={() => setNewItem(true)} type="button" variant="light">
+          <Button
+            onClick={() => setNewItem(true)}
+            type="button"
+            variant="light"
+          >
             new item
           </Button>
         </Group>
