@@ -44,6 +44,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-top: 2rem;
 
         .store-name {
           flex: 100%;
@@ -139,11 +140,39 @@
           align-items: center;
           padding: 1rem 0;
           border-top: 1px solid $color-border;
+          flex-wrap: wrap;
 
           .item-name {
             input:read-only {
               border: 0;
               font-size: $font-md;
+            }
+          }
+
+          .item-info {
+            display: flex;
+            width: 100%;
+            padding: 0 12px;
+
+            label {
+              font-size: $font-xs;
+              color: $color-secondary-text;
+            }
+
+            .item-min-quantity,
+            .item-price {
+              display: flex;
+              align-items: center;
+              font-size: $font-xs;
+
+              input {
+                width: 50px;
+                color: $color-secondary-text;
+
+                &:read-only {
+                  border: 0;
+                }
+              }
             }
           }
 
@@ -153,6 +182,16 @@
             input {
               padding: 0 36px 0 0;
               text-align: right;
+            }
+          }
+
+          .popover {
+            .more-btn {
+              padding: 0 0 0 10px;
+              svg {
+                margin-right: -10px;
+                color: $color-secondary-text;
+              }
             }
           }
         }
@@ -174,6 +213,7 @@
         background-color: $color-white;
       }
     }
+
     // e: stock
   }
 }

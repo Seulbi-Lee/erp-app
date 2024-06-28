@@ -189,3 +189,12 @@ main {
     width: 60vw;
   }
 }
+
+.stock-popover-dropdown {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    padding: 0;
+  }
+}

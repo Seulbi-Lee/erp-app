@@ -45,7 +45,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(historyError.details);
   }
 
-  console.log(data);
-
   return NextResponse.json("update completed");
 }
