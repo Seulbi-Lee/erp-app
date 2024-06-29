@@ -33,6 +33,15 @@
       margin-bottom: 2rem;
     }
 
+    .popover {
+      .more-btn {
+        padding: 0 0 0 0;
+        svg {
+          color: $color-secondary-text;
+        }
+      }
+    }
+
     .select-time {
       display: flex;
       align-items: flex-end;
@@ -44,19 +53,26 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: 2rem;
+
+        & + .detail-item {
+          margin-top: 2rem;
+        }
 
         .store-name {
           flex: 100%;
-          margin-bottom: 1rem;
+          margin-bottom: 0.8rem;
+          color: $color-primary;
         }
 
         .amounts {
           font-weight: 600;
+          margin-top: 0.8rem;
+          font-size: $font-lg;
         }
 
         .working-hour {
-          margin-top: 0.5rem;
+          margin-top: 0.8rem;
+          font-size: $font-sm;
           color: $color-secondary-text;
         }
       }
@@ -190,7 +206,6 @@
               padding: 0 0 0 10px;
               svg {
                 margin-right: -10px;
-                color: $color-secondary-text;
               }
             }
           }

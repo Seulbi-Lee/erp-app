@@ -86,10 +86,9 @@ const SetDailyScheduleComponent = ({
 
     const data = await res.json();
 
-    console.log(data);
-
     alert("Saved");
-    router.refresh();
+
+    location.reload();
   };
 
   if (!memberData) return;
