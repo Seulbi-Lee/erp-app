@@ -13,10 +13,7 @@ export const getDailySchedule = async (calendarData: {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error();
-  }
+  if (!user) return "no user";
 
   const startDate = DateTime.fromObject(calendarData.monthData!).startOf(
     "month"

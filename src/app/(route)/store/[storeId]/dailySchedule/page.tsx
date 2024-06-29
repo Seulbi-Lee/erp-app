@@ -29,7 +29,7 @@ const DailySchedulePage = async (props: { params: { storeId: string } }) => {
   // get user_id, users(username) from store_members
   const { data: memberData, error: memberError } = await supabaseAdmin
     .from("store_members")
-    .select("user_id, users!store_members_user_id_fkey(username)")
+    .select("user_id, position, users!store_members_user_id_fkey(username)")
     .eq("store_id", storeId);
   /**
    * SELECT user_id users.username FROM store_members
@@ -43,10 +43,12 @@ const DailySchedulePage = async (props: { params: { storeId: string } }) => {
         <div className="container-inner">
           <DailyScheduleComponent />
 
-          <SetDailyScheduleComponent
-            storeData={storeData}
-            memberData={memberData}
-          />
+          {memberData![0].position === "admin" && (
+            <SetDailyScheduleComponent
+              storeData={storeData}
+              memberData={memberData}
+            />
+          )}
         </div>
       </div>
     </>
