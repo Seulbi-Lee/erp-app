@@ -10,6 +10,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "planify",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({
@@ -19,10 +24,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
-      />
       <link rel="icon" type="image/svg+xml" href="/logo_icon.svg"></link>
       <head>
         <ColorSchemeScript />
