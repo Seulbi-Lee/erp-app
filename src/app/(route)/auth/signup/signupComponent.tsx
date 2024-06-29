@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const SignupComponent = () => {
   const supabase = createClient();
-  const [ sendEmail, setSendEmail ] = useState<string>("Sign up");
+  const [sendEmail, setSendEmail] = useState<string>("Sign up");
 
   const form = useForm({
     mode: "uncontrolled",
@@ -31,7 +31,12 @@ const SignupComponent = () => {
     },
   });
 
-  const signUpHandler = async (values: { name: string; email: string; password: string; confirmPassword: string; }) => {
+  const signUpHandler = async (values: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) => {
     const { error: signupError } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
@@ -53,7 +58,7 @@ const SignupComponent = () => {
     setSendEmail("Resend Email");
 
     alert("check your email");
-  }
+  };
 
   return (
     <>
