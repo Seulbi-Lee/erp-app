@@ -54,7 +54,7 @@ const JoinStoreComponent = () => {
       alert(data);
       return;
     }
-    console.log(data);
+    // console.log(data);
 
     route.push(
       "/account/addStore/joinStore/setMemberInfo?" +

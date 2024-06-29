@@ -30,40 +30,41 @@ const CalendarDateComponent: FC<PropsWithChildren<CalendarDateProps>> = ({
         onClick={dailyScheduleHandler}
       >
         {dateTime.day}
-        {scheduleData?.map(
-          (
-            data: {
-              date: string;
-              start: string;
-              amounts: number;
-              color: string;
-            },
-            index: number
-          ) => {
-            if (date === data.date) {
-              return (
-                <div
-                  key={index}
-                  className="daily-schedule"
-                  style={{
-                    borderLeft: 4,
-                    borderStyle: "solid",
-                    borderColor: data.color,
-                  }}
-                >
-                  <p>{DateTime.fromISO(data.start).toFormat("HH:mm")}</p>
-                  <NumberFormatter
-                    className="strong"
-                    prefix="$"
-                    thousandSeparator
-                    value={data.amounts}
-                    decimalScale={2}
-                  />
-                </div>
-              );
+        {scheduleData &&
+          scheduleData?.map(
+            (
+              data: {
+                date: string;
+                start: string;
+                amounts: number;
+                color: string;
+              },
+              index: number
+            ) => {
+              if (date === data.date) {
+                return (
+                  <div
+                    key={index}
+                    className="daily-schedule"
+                    style={{
+                      borderLeft: 4,
+                      borderStyle: "solid",
+                      borderColor: data.color,
+                    }}
+                  >
+                    <p>{DateTime.fromISO(data.start).toFormat("HH:mm")}</p>
+                    <NumberFormatter
+                      className="strong"
+                      prefix="$"
+                      thousandSeparator
+                      value={data.amounts}
+                      decimalScale={2}
+                    />
+                  </div>
+                );
+              }
             }
-          }
-        )}
+          )}
       </div>
     </>
   );

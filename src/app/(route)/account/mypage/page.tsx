@@ -19,7 +19,14 @@ const JoinStorePage = () => {
 
   return (
     <>
-      <Flex justify="center" align="center" mih={100}>
+      <Flex
+        justify="center"
+        align="center"
+        direction="column"
+        mih={500}
+        gap="md"
+      >
+        <Button onClick={() => router.push("/dashboard")}>Home</Button>
         <Button onClick={signOutHandler}>logout</Button>
       </Flex>
     </>

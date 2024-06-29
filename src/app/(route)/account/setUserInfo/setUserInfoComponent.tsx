@@ -40,6 +40,8 @@ const SetUserInfoComponent = ({
       return;
     }
 
+    alert("saved");
+
     route.push("/dashboard");
   };
 

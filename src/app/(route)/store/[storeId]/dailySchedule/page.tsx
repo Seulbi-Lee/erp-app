@@ -43,12 +43,13 @@ const DailySchedulePage = async (props: { params: { storeId: string } }) => {
         <div className="container-inner">
           <DailyScheduleComponent />
 
-          {memberData![0].position === "admin" && (
-            <SetDailyScheduleComponent
-              storeData={storeData}
-              memberData={memberData}
-            />
-          )}
+          {memberData![0].position === "admin" ||
+            ("owner" && (
+              <SetDailyScheduleComponent
+                storeData={storeData}
+                memberData={memberData}
+              />
+            ))}
         </div>
       </div>
     </>

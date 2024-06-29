@@ -30,8 +30,6 @@ const DashboardPage = async () => {
     .eq("id", user.id)
     .single();
 
-  console.log(storeData);
-
   return (
     <>
       <HeaderComponent username={userData?.username} storeData={storeData} />
