@@ -17,8 +17,8 @@ const SignInComponent = () => {
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      email: "drizzle8926@gmail.com",
-      password: "qwer1234",
+      email: "",
+      password: "",
     },
   });
 
