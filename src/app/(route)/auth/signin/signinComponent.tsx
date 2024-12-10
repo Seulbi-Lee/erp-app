@@ -60,7 +60,7 @@ const SignInComponent = () => {
           />
           <PasswordInput
             mt="md"
-            placeholder="PW"
+            placeholder="password"
             withAsterisk
             key={form.key("password")}
             {...form.getInputProps("password")}
