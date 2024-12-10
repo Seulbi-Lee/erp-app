@@ -35,7 +35,7 @@ const SignupPage = () => {
   const signUpHandler = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (!emailRef.current || !passwordRef.current || !fullnameRef.current){
+    if (!emailRef.current || !passwordRef.current || !fullnameRef.current) {
       return;
     }
     // validation check
@@ -69,7 +69,7 @@ const SignupPage = () => {
       // location.origin ->  client
       // header.origin -> server
       const header = headers();
-      console.log(header.get(""));
+      // console.log(header.get(""));
 
       if (signupError) {
         alert("Unknown Error: try again");
@@ -120,14 +120,9 @@ const SignupPage = () => {
         </form>
 
         <div className={styles.anchors}>
-          <Anchor
-              mt="lg"
-              href=""
-              className={styles.anchor}
-              target="_self"
-            >
-              resend email
-            </Anchor>
+          <Anchor mt="lg" href="" className={styles.anchor} target="_self">
+            resend email
+          </Anchor>
 
           <Anchor
             mt="lg"

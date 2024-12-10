@@ -25,17 +25,16 @@ const SetMemberInfoComponent = () => {
   }) => {
     const res = await fetch("/api/setMemberInfo", {
       method: "POST",
-      body: JSON.stringify({values, search}),
+      body: JSON.stringify({ values, search }),
     });
 
-    
     if (!res.ok) {
       throw new Error(res.statusText);
     }
 
     const data = await res.json();
 
-    console.log(data);
+    // console.log(data);
     route.push("/dashboard");
   };
 
